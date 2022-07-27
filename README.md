@@ -1,3 +1,3 @@
-# project_k3z2b_l3j6a_w0d2b
+# Spotify Clone Project
 
-This is Melissa Lin and Rahul Shandilya's project.
+This is Melissa Lin and Rahul Shandilya's project. (with contributions from Mark Hou)
