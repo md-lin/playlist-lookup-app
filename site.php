@@ -7,20 +7,27 @@
 </head>
 
 <body>
-    <h2>Insert New Data</h2>
+<h1> Hello, Guest! </h1>
+    <!-- add a variable for user nickname later  -->
+    <!--update to User once user creates a nickname -->
+
+    <h2>Upload Song</h2>
+    <h4> Starred fields are mandatory.</h4>
 
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
         <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
-        Number: <input type="text" name="insNo"> <br /><br />
-        Name: <input type="text" name="insName"> <br /><br />
+        Title*: <input type="text" name="insTitle"> <br /><br />
+        Duration (in minutes): <input type="text" name="insDuration"> <br /><br />
+        Lyrics: <input type="text" name="insLyrics"> <br /><br />
+        Genre: <input type="text" name="insGenre"> <br /><br />
 
         <input type="submit" value="Insert" name="insertSubmit"></p>
     </form>
 
     <hr />
 
-    <h2>Delete Data</h2>
+    <h2>Delete Album</h2>
 
     <form method="POST" action="site.php">
         <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
@@ -30,13 +37,13 @@
 
     <hr />
 
-    <h2>Update Data</h2>
+    <h2>Update Song</h2>
 
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
         <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-        Old Name: <input type="text" name="oldName"> <br /><br />
-        New Name: <input type="text" name="newName"> <br /><br />
+        Old Title: <input type="text" name="oldName"> <br /><br />
+        New Title: <input type="text" name="newName"> <br /><br />
 
         <input type="submit" value="Update" name="updateSubmit"></p>
     </form>
