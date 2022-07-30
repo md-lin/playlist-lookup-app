@@ -28,6 +28,8 @@
         <p><input type="submit" value="Reset" name="reset"></p>
     </form>
 
+    <hr />
+
 </body>
 
 </html>
