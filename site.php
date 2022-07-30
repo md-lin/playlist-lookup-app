@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>CPSC 304 Project</title>
 </head>
 
 <body>
     <?php
-    echo ('hello');
+    echo ('Welcome to our app');
     ?>
 </body>
 
