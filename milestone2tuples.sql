@@ -74,20 +74,20 @@ INSERT INTO
 VALUES (1, 'Rap', 6, 'Never', 2000000);
  
 INSERT INTO Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (53, 'Monkey-Trap', 4, 'Auuuugh', 500000);
+VALUES (2, 'Monkey-Trap', 4, 'Auuuugh', 500000);
  
 INSERT INTO Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (47, 'Jazz', 1, 'NAAAAAAAAAAAAAH', 1000000);
+VALUES (3, 'Jazz', 1, 'NAAAAAAAAAAAAAH', 1000000);
  
 INSERT INTO Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (14, 'Country', 5, 'Country', 100000);
+VALUES (4, 'Country', 5, 'Country', 100000);
 
 INSERT INTO UserLikesSong (UserID, SongID)
 VALUES(0, 0);
 INSERT INTO UserLikesSong (UserID, SongID)
 VALUES(0, 1);
 INSERT INTO UserLikesSong (UserID, SongID)
-VALUES (2, 53);
+VALUES (2, 2);
 INSERT INTO UserLikesSong (UserID, SongID)
 VALUES (52, 0);
 INSERT INTO UserLikesSong (UserID, SongID)
@@ -95,9 +95,9 @@ VALUES(69, 0);
 
 INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (0, 'sociopath', 0);
 INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (1, 'apathy', 0);
-INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (2, 'turn', 53);
-INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (3, 'me', 53);
-INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (4, 'on', 53);
+INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (2, 'turn', 2);
+INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (3, 'me', 2);
+INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (4, 'on', 2);
 
 INSERT INTO UserPlaylists (PlaylistID) VALUES (0);
 INSERT INTO UserPlaylists (PlaylistID) VALUES (1);
@@ -119,9 +119,9 @@ INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (444, 444);
     
 INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (0, 0);
 INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (0, 1);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (2, 47);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (2, 53);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (444, 53);
+INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (2, 3);
+INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (2, 2);
+INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (444, 2);
     
 INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
 INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');
@@ -149,9 +149,9 @@ INSERT INTO AlbumHasKeyword (KeywordID, Keyword, AlbumID) VALUES (4, 'Upbeat', 2
 
 INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (0, 0);
 INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (0, 1);
-INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (1, 47);
-INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (2, 53);
-INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (2, 14);
+INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (1, 3);
+INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (2, 2);
+INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (2, 4);
     
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (0, 0);
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (0, 1);
