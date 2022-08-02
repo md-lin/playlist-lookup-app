@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<h1> Hello, Guest! </h1>
+    <h1> Hello, Guest! </h1>
     <!-- add a variable for user nickname later  -->
     <!--update to User once user creates a nickname -->
 
@@ -67,7 +67,7 @@
 
     $success = True; //keep track of errors so it redirects the page only if there are no errors
     $db_conn = NULL; // edit the login credentials in connectToDB()
-    $show_debug_alert_messages = False; // set to True if you want alerts to show you which methods are being triggered (see how it is used in debugAlertMessage())
+    $show_debug_alert_messages = True; // set to True if you want alerts to show you which methods are being triggered (see how it is used in debugAlertMessage())
 
     function debugAlertMessage($message)
     {
@@ -226,15 +226,21 @@
 
         //Getting the values from user and insert data into the table
         $tuple = array(
-            ":bind1" => $_POST['insNo'],
-            ":bind2" => $_POST['insName']
+            ":bind1" => $_POST['insTitle'],
+            ":bind2" => $_POST['insDuration'],
+            ":bind3" => $_POST['insLyrics'],
+            ":bind4" => $_POST['insGenre'],
+            ":bind5" => 0,
+            ":bind6" => "songs_auto_incr.nextval"
         );
 
         $alltuples = array(
             $tuple
         );
 
-        executeBoundSQL("insert into demoTable values (:bind1, :bind2)", $alltuples);
+        executeBoundSQL("insert into LYRICSTITLE values (:bind3, :bind1)", $alltuples);
+
+        executeBoundSQL("insert into song values (:bind6,:bind4, :bind2, :bind3, :bind5)", $alltuples);
         OCICommit($db_conn);
     }
 
