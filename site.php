@@ -27,12 +27,24 @@
 
     <hr />
 
-    <h2>Delete Album</h2>
+    <h2>Reset Tables</h2>
+    <!-- this tag should be removed in future versions, left for reference for the time being -->
 
     <form method="POST" action="site.php">
         <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
         <input type="hidden" id="resetTablesRequest" name="resetTablesRequest">
         <p><input type="submit" value="Reset" name="reset"></p>
+    </form>
+
+    <hr />
+
+    <h2>Delete Playlist</h2>
+
+    <form method="POST" action="site.php">
+        <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
+        <input type="hidden" id="deletePlaylistRequest" name="deletePlaylistRequest">
+        Playlist Name: <input type="text" name="deletePlaylistName"> <br />
+        <p><input type="submit" value="Delete" name="deleteSubmit"></p>
     </form>
 
     <hr />
@@ -192,6 +204,22 @@
         OCICommit($db_conn);
     }
 
+    function handleDeleteRequest()
+    {
+        global $db_conn;
+
+        $tuple = array(
+            ":bind1" => $_POST['deletePlaylistName']
+        );
+
+        $alltuples = array(
+            $tuple
+        );
+
+        executeBoundSql("delete from playlist p where p.playlistname= (:bind1), $alltuples");
+        OCICommit($db_conn);
+    }
+
     function handleInsertRequest()
     {
         global $db_conn;
@@ -242,6 +270,8 @@
                 handleUpdateRequest();
             } else if (array_key_exists('insertQueryRequest', $_POST)) {
                 handleInsertRequest();
+            } else if (array_key_exists('deletePlaylistRequest', $_POST)) {
+                handleDeleteRequest();
             }
 
             disconnectFromDB();
