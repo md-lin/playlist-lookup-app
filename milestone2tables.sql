@@ -37,7 +37,8 @@ CREATE TABLE SongHasKeyword(KeywordID INTEGER PRIMARY KEY,
                             SongID INTEGER,
                             FOREIGN KEY (SongID) REFERENCES Song);
 
-CREATE TABLE UserPlaylists(PlaylistID INTEGER PRIMARY KEY);
+CREATE TABLE UserPlaylists(PlaylistID INTEGER PRIMARY KEY,
+                            PlaylistName UNIQUE);
 
 CREATE TABLE UserHasUserPlaylists(UserID INTEGER,
                                 PlaylistID INTEGER,
