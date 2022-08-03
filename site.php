@@ -42,6 +42,7 @@
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
         <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
+        Select Song Attribute to update:
         Old Title: <input type="text" name="oldName"> <br /><br />
         New Title: <input type="text" name="newName"> <br /><br />
 
