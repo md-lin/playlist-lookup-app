@@ -99,23 +99,23 @@ INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (2, 'turn', 2);
 INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (3, 'me', 2);
 INSERT INTO SongHasKeyword (KeywordID, Keyword, SongID) VALUES (4, 'on', 2);
 
-INSERT INTO UserPlaylists (PlaylistID) VALUES (0);
-INSERT INTO UserPlaylists (PlaylistID) VALUES (1);
-INSERT INTO UserPlaylists (PlaylistID) VALUES (2);
-INSERT INTO UserPlaylists (PlaylistID) VALUES (3);
-INSERT INTO UserPlaylists (PlaylistID) VALUES (444);
+INSERT INTO UserPlaylists (PlaylistID, PlaylistName) VALUES (0, 'melissaplaylist');
+INSERT INTO UserPlaylists (PlaylistID, PlaylistName) VALUES (1, 'sad');
+INSERT INTO UserPlaylists (PlaylistID, PlaylistName) VALUES (2, 'happy');
+INSERT INTO UserPlaylists (PlaylistID, PlaylistName) VALUES (3, 'breakup');
+INSERT INTO UserPlaylists (PlaylistID, PlaylistName) VALUES (4, 'fine');
 
 INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (0, 0);
 INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (0, 1);
 INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (2, 2);
 INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (52, 3);
-INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (52, 444);
+INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (52, 4);
 
 INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (0, 0);
 INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (1, 1);
 INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (2, 2);
 INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (3, 3);
-INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (444, 444);
+INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (444, 4);
     
 INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (0, 0);
 INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (0, 1);
@@ -152,14 +152,16 @@ INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (0, 1);
 INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (1, 3);
 INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (2, 2);
 INSERT INTO AlbumIncludesSong (AlbumID, SongID) VALUES (2, 4);
-    
+
+INSERT INTO ArtistCreatesSong(UserID, SongID) VALUES (0, 0); 
+INSERT INTO ArtistCreatesSong(UserID, SongID) VALUES (0, 1); 
+INSERT INTO ArtistCreatesSong(UserID, SongID) VALUES (0, 2); 
+INSERT INTO ArtistCreatesSong(UserID, SongID) VALUES (3, 0); 
+INSERT INTO ArtistCreatesSong(UserID, SongID) VALUES (4, 3); 
+
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (0, 0);
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (0, 1);
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (3, 2);
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (4, 5);
 INSERT INTO ArtistHasAlbum (UserID, AlbumID) VALUES (5, 99);
-    
-    
-    
-    
     
