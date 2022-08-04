@@ -51,14 +51,16 @@
 
     <h2>Update Song</h2>
 
+    <form method="GET" action="site.php">
+        <!--refresh page when submitted-->
+        <input type="hidden" id="printTuplesRequest" name="printTuplesRequest">
+        <input type="submit" value="Show Songs" name="printTuples"></p>
+    </form>
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
         <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-        Select Song Attribute to update:
-        Old Title: <input type="text" name="oldName"> <br /><br />
-        New Title: <input type="text" name="newName"> <br /><br />
-
-        <input type="submit" value="Update" name="updateSubmit"></p>
+        Enter ID of song to update: <input type="text" name="songID_upd"> <br /><br />
+        <input type="submit" value="Go" name="updateSubmit"></p>
     </form>
 
     <hr />
@@ -143,12 +145,12 @@
 
     function printResult($result)
     { //prints results from a select statement
-        echo "<br>Retrieved data from table demoTable:<br>";
+        echo "<br>Retrieved data from table Song:<br>";
         echo "<table>";
-        echo "<tr><th>ID</th><th>Name</th></tr>";
+        echo "<tr><th>SongID</th><th>Genre</th><th>Duration</th><th>Lyrics</th><th>Streams</th></tr>";
 
         while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-            echo "<tr><td>" . $row["ID"] . "</td><td>" . $row["NAME"] . "</td></tr>"; //or just use "echo $row[0]"
+            echo "<tr><td>" . $row["SongID"] . "</td><td>" . $row["Genre"] . "</td><td>" . $row["Duration"] . "</td><td>" . $row["Lyrics"] . "</td><td>" . $row["Streams"]  . "</td></tr>"; //or just use "echo $row[0]"
         }
 
         echo "</table>";
@@ -249,10 +251,10 @@
     {
         global $db_conn;
 
-        $result = executePlainSQL("SELECT Count(*) FROM demoTable");
+        $result = executePlainSQL("SELECT Count(*) FROM Song");
 
         if (($row = oci_fetch_row($result)) != false) {
-            echo "<br> The number of tuples in demoTable: " . $row[0] . "<br>";
+            echo "<br> The number of tuples in Song table: " . $row[0] . "<br>";
         }
     }
 
@@ -261,7 +263,7 @@
 
         global $db_conn;
 
-        $result = executePlainSQL("SELECT * FROM demoTable");
+        $result = executePlainSQL("SELECT * FROM Song");
 
         printResult($result);
     }
