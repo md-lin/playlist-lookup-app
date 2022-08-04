@@ -19,21 +19,9 @@
         <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
         Title*: <input type="text" name="insTitle"> <br /><br />
         Duration (in minutes): <input type="text" name="insDuration"> <br /><br />
-        Lyrics: <input type="text" name="insLyrics"> <br /><br />
         Genre: <input type="text" name="insGenre"> <br /><br />
 
         <input type="submit" value="Insert" name="insertSubmit"></p>
-    </form>
-
-    <hr />
-
-    <h2>Reset Tables</h2>
-    <!-- this tag should be removed in future versions, left for reference for the time being -->
-
-    <form method="POST" action="site.php">
-        <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
-        <input type="hidden" id="resetTablesRequest" name="resetTablesRequest">
-        <p><input type="submit" value="Reset" name="reset"></p>
     </form>
 
     <hr />
@@ -58,9 +46,18 @@
     </form>
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
+
         <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
+        <pre>
+				                            Select to update <br/><br/>
         Enter ID of song to update: <input type="text" name="songID_upd"> <br /><br />
-        <input type="submit" value="Go" name="updateSubmit"></p>
+        Title:	                    <input type="text" name="new_Title">      <input type="checkbox" name="formUpdate[]" value="Yes" /> <br /><br />
+        Genre:		            <input type="text" name="new_Genre">      <input type="checkbox" name="formUpdate[]" value="Yes" /> <br /><br />
+        Duration:	            <input type="text" name="new_Duration">      <input type="checkbox" name="formUpdate[]" value="Yes" /> <br /><br />
+                                <input type="submit" value="Update" name="updateSubmit"></p>    
+        </pre>
+
+
     </form>
 
     <hr />
@@ -147,10 +144,10 @@
     { //prints results from a select statement
         echo "<br>Retrieved data from table Song:<br>";
         echo "<table>";
-        echo "<tr><th>SongID</th><th>Genre</th><th>Duration</th><th>Lyrics</th><th>Streams</th></tr>";
+        echo "<tr><th>SongID</th><th>Title</th><th>Genre</th><th>Duration</th></tr>";
 
         while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-            echo "<tr><td>" . $row["SongID"] . "</td><td>" . $row["Genre"] . "</td><td>" . $row["Duration"] . "</td><td>" . $row["Lyrics"] . "</td><td>" . $row["Streams"]  . "</td></tr>"; //or just use "echo $row[0]"
+            echo "<tr><td>" . $row["SongID"] . "</td><td>" . $row["Title"] . "</td><td>" . $row["Genre"] . "</td><td>" . $row["Duration"] . "</td></tr>"; //or just use "echo $row[0]"
         }
 
         echo "</table>";
@@ -187,11 +184,22 @@
     {
         global $db_conn;
 
-        $old_name = $_POST['oldName'];
-        $new_name = $_POST['newName'];
+        $tuple = array(
+            ":bind1" => $_POST['songID_upd'],
+            ":bind2" => $_POST['new_Title'],
+            ":bind3" => $_POST['new_Genre'],
+            ":bind4" => $_POST['new_Duration']
+        );
 
-        // you need the wrap the old name and new name values with single quotations
-        executePlainSQL("UPDATE demoTable SET name='" . $new_name . "' WHERE name='" . $old_name . "'");
+        $alltuples = array(
+            $tuple
+        );
+
+        $updates = $_POST['formUpdate'];
+
+        if ($updates[0] == 'Yes') executeBoundSQL("update Song set Title=:bind2 where SONGID=:bind1", $alltuples);
+        if ($updates[1] == 'Yes') executeBoundSQL("update Song set Genre=:bind3 where SONGID=:bind1", $alltuples);
+        if ($updates[2] == 'Yes') executeBoundSQL("update Song set Duration=:bind4 where SONGID=:bind1", $alltuples);
         OCICommit($db_conn);
     }
 
@@ -231,19 +239,16 @@
         $tuple = array(
             ":bind1" => $_POST['insTitle'],
             ":bind2" => $_POST['insDuration'],
-            ":bind3" => $_POST['insLyrics'],
-            ":bind4" => $_POST['insGenre'],
-            ":bind5" => 100000
+            ":bind3" => $_POST['insGenre']
         );
 
         $alltuples = array(
             $tuple
         );
 
-        executeBoundSQL("insert into LYRICSTITLE values (:bind3, :bind1)", $alltuples);
-        if ($success) {
-            executeBoundSQL("insert into song values (song_seq.nextval,:bind4, :bind2, :bind3, :bind5)", $alltuples);
-        }
+
+        executeBoundSQL("insert into song (SongID, Title, Duration, Genre) values (song_seq.nextval,:bind1, :bind2, :bind3)", $alltuples);
+
         OCICommit($db_conn);
     }
 

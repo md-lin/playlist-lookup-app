@@ -24,12 +24,9 @@ CREATE TABLE ProfileHas
 CREATE TABLE Song
 (
     SongID INTEGER PRIMARY KEY,
+    Title VARCHAR(200),
     Genre VARCHAR(20),
-    Duration REAL,
-    Lyrics VARCHAR(200),
-    NumStreams INTEGER,
-    FOREIGN KEY (Lyrics) REFERENCES LyricsTitle(Lyrics) ON DELETE CASCADE,
-    FOREIGN KEY (NumStreams) REFERENCES StreamSongCertification(NumStreams) ON DELETE CASCADE
+    Duration REAL
 );
 
 CREATE TABLE UserLikesSong
@@ -41,17 +38,17 @@ CREATE TABLE UserLikesSong
     FOREIGN KEY (SongID) REFERENCES Song ON DELETE CASCADE
 );
 
-CREATE TABLE StreamSongCertification
-(
-    NumStreams INTEGER PRIMARY KEY,
-    Certification VARCHAR(20)
-);
+--CREATE TABLE StreamSongCertification
+--(
+--    NumStreams INTEGER PRIMARY KEY,
+--    Certification VARCHAR(20)
+--);
 
-CREATE TABLE LyricsTitle
-(
-    Lyrics VARCHAR(200) PRIMARY KEY,
-    Title VARCHAR(200)
-);
+--CREATE TABLE LyricsTitle
+--(
+--  Lyrics VARCHAR(200) PRIMARY KEY,
+--    Title VARCHAR(200)
+--);
 
 CREATE TABLE SongHasKeyword
 (
@@ -76,46 +73,43 @@ CREATE TABLE UserHasUserPlaylists
     FOREIGN KEY (PlaylistID) REFERENCES UserPlaylists ON DELETE CASCADE
 );
 
-CREATE TABLE PlaylistContent
-(
-    ContentID INTEGER PRIMARY KEY,
-    PlaylistID INTEGER,
-    UNIQUE (PlaylistID),
-    FOREIGN KEY (PlaylistID) REFERENCES UserPlaylists ON DELETE CASCADE
-);
+--CREATE TABLE PlaylistContent
+--(
+--    ContentID INTEGER PRIMARY KEY,
+--    PlaylistID INTEGER,
+--    UNIQUE (PlaylistID),
+--    FOREIGN KEY (PlaylistID) REFERENCES UserPlaylists ON DELETE CASCADE
+--);
 
-CREATE TABLE PlaylistContentIncludesSong
+CREATE TABLE PlaylistIncludesSong
 (
-    ContentID INTEGER,
+    PlaylistID INTEGER,
     SongID INTEGER,
-    PRIMARY KEY (ContentID, SongID),
-    FOREIGN KEY (ContentID) REFERENCES PlaylistContent ON DELETE CASCADE,
+    PRIMARY KEY (PlaylistID, SongID),
+    FOREIGN KEY (PlaylistID) REFERENCES UserPlaylists ON DELETE CASCADE,
     FOREIGN KEY (SongID) REFERENCES Song ON DELETE CASCADE
 );
 
-CREATE TABLE StreamAlbumCertification
-(
-    NumStreams INTEGER PRIMARY KEY,
-    Certification VARCHAR(30)
-);
+--CREATE TABLE StreamAlbumCertification
+--(
+--    NumStreams INTEGER PRIMARY KEY,
+--    Certification VARCHAR(30)
+--);
 
-CREATE TABLE TitleRelease
-(
-    Title VARCHAR(30),
-    AlbumVersion INTEGER,
-    ReleaseDate DATE,
-    NumSongs INTEGER,
-    PRIMARY KEY (Title, AlbumVersion)
-);
+--CREATE TABLE TitleRelease
+--(
+--    Title VARCHAR(30),
+--    AlbumVersion INTEGER,
+--    ReleaseDate DATE,
+--    NumSongs INTEGER,
+--    PRIMARY KEY (Title, AlbumVersion)
+--);
 
 CREATE TABLE Album
 (
     AlbumID INTEGER PRIMARY KEY,
     Title VARCHAR(20),
-    AlbumVersion INTEGER,
-    NumStreams INTEGER,
-    FOREIGN KEY (Title, AlbumVersion) REFERENCES TitleRelease ON DELETE CASCADE,
-    FOREIGN KEY (NumStreams) REFERENCES StreamAlbumCertification ON DELETE CASCADE
+    NumSongs INTEGER
 );
 
 CREATE TABLE AlbumHasKeyword
