@@ -19,21 +19,9 @@
         <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
         Title*: <input type="text" name="insTitle"> <br /><br />
         Duration (in minutes): <input type="text" name="insDuration"> <br /><br />
-        Lyrics: <input type="text" name="insLyrics"> <br /><br />
         Genre: <input type="text" name="insGenre"> <br /><br />
 
         <input type="submit" value="Insert" name="insertSubmit"></p>
-    </form>
-
-    <hr />
-
-    <h2>Reset Tables</h2>
-    <!-- this tag should be removed in future versions, left for reference for the time being -->
-
-    <form method="POST" action="site.php">
-        <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
-        <input type="hidden" id="resetTablesRequest" name="resetTablesRequest">
-        <p><input type="submit" value="Reset" name="reset"></p>
     </form>
 
     <hr />
@@ -51,14 +39,41 @@
 
     <h2>Update Song</h2>
 
+    <form method="GET" action="site.php">
+        <!--refresh page when submitted-->
+        <input type="hidden" id="printTuplesRequest" name="printTuplesRequest">
+        <input type="submit" value="Show Songs" name="printTuples"></p>
+    </form>
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
-        <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-        Select Song Attribute to update:
-        Old Title: <input type="text" name="oldName"> <br /><br />
-        New Title: <input type="text" name="newName"> <br /><br />
 
-        <input type="submit" value="Update" name="updateSubmit"></p>
+        <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
+        <pre>
+				                            Select to update <br/><br/>
+        Enter ID of song to update: <input type="text" name="songID_upd"> <br /><br />
+        Title:	                    <input type="text" name="new_Title">      <input type="checkbox" name="formUpdate[]" value="Title" /> <br /><br />
+        Genre:		            <input type="text" name="new_Genre">      <input type="checkbox" name="formUpdate[]" value="Genre" /> <br /><br />
+        Duration:	            <input type="text" name="new_Duration">      <input type="checkbox" name="formUpdate[]" value="Duration" /> <br /><br />
+                                        <input type="submit" value="Update" name="updateSubmit"></p>    
+        </pre>
+
+
+    </form>
+
+    <hr />
+
+    <h2>Projection from Song table</h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="projectSongRequest" name="projectSongRequest">
+        Select song attributes to project: <br /><br />
+        <pre>
+        Song ID:  <input type="checkbox" name="formProject[]" value="SongID" /> <br />
+        Title:    <input type="checkbox" name="formProject[]" value="Title" /> <br />
+        Genre:    <input type="checkbox" name="formProject[]" value="Genre" /> <br />
+        Duration: <input type="checkbox" name="formProject[]" value="Duration" /> <br />
+                <p>         <input type="submit" value="Project" name="projectSubmit"></p>
+        </pre>
     </form>
 
     <hr />
@@ -143,14 +158,78 @@
 
     function printResult($result)
     { //prints results from a select statement
-        echo "<br>Retrieved data from table demoTable:<br>";
-        echo "<table>";
-        echo "<tr><th>ID</th><th>Name</th></tr>";
+        echo "<br/>Retrieved data from table Song:<br/><br/>";
+        echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+        echo "<tr><th>SongID</th><th>Title</th><th>Genre</th><th>Duration</th></tr>";
 
         while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-            echo "<tr><td>" . $row["ID"] . "</td><td>" . $row["NAME"] . "</td></tr>"; //or just use "echo $row[0]"
+            echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>";
         }
 
+        echo "</table>";
+    }
+
+
+    function build_table($array)
+    {
+        // start table
+        $html = '<table>';
+        // header row
+        $html .= '<tr>';
+        foreach ($array[0] as $key => $value) {
+            $html .= '<th>' . htmlspecialchars($key) . '</th>';
+        }
+        $html .= '</tr>';
+
+        // data rows
+        foreach ($array as $key => $value) {
+            $html .= '<tr>';
+            foreach ($value as $key2 => $value2) {
+                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
+            }
+            $html .= '</tr>';
+        }
+
+        // finish table and return it
+
+        $html .= '</table>';
+        return $html;
+    }
+
+    function printCustomResult($result)
+    {
+        echo "<br/>Retrieved data:<br/><br/>";
+        $row = oci_fetch_assoc($result);
+        echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+        echo "<thead>";
+        echo  "<tr>";
+        echo  "<th>";
+        // foreach (array_keys($row) as $array_key) {
+        //     if ((string)(int)$array_key != $array_key) {
+        //         echo "</th><th>$array_key";
+        //     }
+        // }
+        echo implode("</th><th>", array_keys($row));
+        echo "</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        echo "<tr>";
+        echo "<td>";
+        echo implode("</td><td>", $row);
+        echo "</td>";
+
+        while ($row = oci_fetch_assoc($result)) {
+
+            //print_r($row);
+
+            echo "<tr>";
+            echo "<td>";
+            echo implode("</td><td>", $row);
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</tbody>";
         echo "</table>";
     }
 
@@ -181,15 +260,36 @@
         OCILogoff($db_conn);
     }
 
+    function IsChecked($chkname, $value)
+    {
+        if (!empty($_POST[$chkname])) {
+            foreach ($_POST[$chkname] as $chkval) {
+                if ($chkval == $value) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     function handleUpdateRequest()
     {
         global $db_conn;
 
-        $old_name = $_POST['oldName'];
-        $new_name = $_POST['newName'];
+        $tuple = array(
+            ":bind1" => $_POST['songID_upd'],
+            ":bind2" => $_POST['new_Title'],
+            ":bind3" => $_POST['new_Genre'],
+            ":bind4" => $_POST['new_Duration']
+        );
 
-        // you need the wrap the old name and new name values with single quotations
-        executePlainSQL("UPDATE demoTable SET name='" . $new_name . "' WHERE name='" . $old_name . "'");
+        $alltuples = array(
+            $tuple
+        );
+
+        if (IsChecked('formUpdate', 'Title')) executeBoundSQL("update Song set Title=:bind2 where SONGID=:bind1", $alltuples);
+        if (IsChecked('formUpdate', 'Genre')) executeBoundSQL("update Song set Genre=:bind3 where SONGID=:bind1", $alltuples);
+        if (IsChecked('formUpdate', 'Duration')) executeBoundSQL("update Song set Duration=:bind4 where SONGID=:bind1", $alltuples);
         OCICommit($db_conn);
     }
 
@@ -229,19 +329,16 @@
         $tuple = array(
             ":bind1" => $_POST['insTitle'],
             ":bind2" => $_POST['insDuration'],
-            ":bind3" => $_POST['insLyrics'],
-            ":bind4" => $_POST['insGenre'],
-            ":bind5" => 100000
+            ":bind3" => $_POST['insGenre']
         );
 
         $alltuples = array(
             $tuple
         );
 
-        executeBoundSQL("insert into LYRICSTITLE values (:bind3, :bind1)", $alltuples);
-        if ($success) {
-            executeBoundSQL("insert into song values (song_seq.nextval,:bind4, :bind2, :bind3, :bind5)", $alltuples);
-        }
+
+        executeBoundSQL("insert into song (SongID, Title, Duration, Genre) values (song_seq.nextval,:bind1, :bind2, :bind3)", $alltuples);
+
         OCICommit($db_conn);
     }
 
@@ -249,10 +346,10 @@
     {
         global $db_conn;
 
-        $result = executePlainSQL("SELECT Count(*) FROM demoTable");
+        $result = executePlainSQL("SELECT Count(*) FROM Song");
 
         if (($row = oci_fetch_row($result)) != false) {
-            echo "<br> The number of tuples in demoTable: " . $row[0] . "<br>";
+            echo "<br> The number of tuples in Song table: " . $row[0] . "<br>";
         }
     }
 
@@ -261,9 +358,34 @@
 
         global $db_conn;
 
-        $result = executePlainSQL("SELECT * FROM demoTable");
+        $result = executePlainSQL("SELECT * FROM Song");
 
         printResult($result);
+    }
+
+    function handleProjectRequest()
+    {
+
+        global $db_conn;
+
+        $attributes = array();
+
+        if (IsChecked('formProject', 'SongID')) array_push($attributes, 'SongID');
+        if (IsChecked('formProject', 'Title')) array_push($attributes, 'Title');
+        if (IsChecked('formProject', 'Genre')) array_push($attributes, 'Genre');
+        if (IsChecked('formProject', 'Duration')) array_push($attributes, 'Duration');
+
+        $new_att = join(",", $attributes);
+
+        //echo ($new_att);
+        //echo ("SELECT $new_att FROM Song");
+
+        $result = executePlainSQL("SELECT $new_att FROM Song");
+
+        //echo ($result[0]);
+        printCustomResult($result);
+        // printResult($result);
+        //echo build_table($result);
     }
 
     // HANDLE ALL POST ROUTES
@@ -279,6 +401,8 @@
                 handleInsertRequest();
             } else if (array_key_exists('deletePlaylistRequest', $_POST)) {
                 handleDeleteRequest();
+            } else if (array_key_exists('projectSongRequest', $_POST)) {
+                handleProjectRequest();
             }
 
             disconnectFromDB();
@@ -302,7 +426,7 @@
     }
 
 
-    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])) {
+    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['projectSubmit'])) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
         handleGETRequest();
