@@ -199,7 +199,7 @@
     function printCustomResult($result)
     {
         echo "<br/>Retrieved data:<br/><br/>";
-        $row = OCI_Fetch_Array($result, OCI_BOTH);
+        $row = oci_fetch_assoc($result);
         echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
         echo "<thead>";
         echo  "<tr>";
@@ -219,7 +219,7 @@
         echo implode("</td><td>", $row);
         echo "</td>";
 
-        while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+        while ($row = oci_fetch_assoc($result)) {
 
             //print_r($row);
 
