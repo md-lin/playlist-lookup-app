@@ -66,21 +66,21 @@ VALUES     (69, 'ironcat');
 -- ('Country','Country Road');
 
 INSERT INTO
-    Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (0, 'Pop', 3, 'Fly', 10000000);
+    Song (SongID, Genre,Duration, Title)
+VALUES (0, 'Pop', 3, 'Fly');
  
 INSERT INTO
-    Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (1, 'Rap', 6, 'Never', 2000000);
+    Song (SongID, Genre,Duration, Title)
+VALUES (1, 'Rap', 6, 'Never');
  
-INSERT INTO Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (2, 'Monkey-Trap', 4, 'Auuuugh', 500000);
+INSERT INTO Song (SongID, Genre,Duration, Title)
+VALUES (2, 'Monkey-Trap', 4, 'Auuuugh');
  
-INSERT INTO Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (3, 'Jazz', 1, 'NAAAAAAAAAAAAAH', 1000000);
+INSERT INTO Song (SongID, Genre,Duration, Title)
+VALUES (3, 'Jazz', 1, 'NAAAAAAAAAAAAAH');
  
-INSERT INTO Song (SongID, Genre,Duration,Lyrics,NumStreams)
-VALUES (4, 'Country', 5, 'Country', 100000);
+INSERT INTO Song (SongID, Genre,Duration, Title)
+VALUES (4, 'Country', 5, 'Country');
 
 INSERT INTO UserLikesSong (UserID, SongID)
 VALUES(0, 0);
@@ -135,11 +135,11 @@ INSERT INTO PlaylistIncludesSong (PlaylistID, SongID) VALUES (444, 2);
 -- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('Pigeon!', 1, '25-FEB-22', 8);
 -- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('ZZZ', 1, '16-NOV-18', 9);
 
-INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (0, '032 Funk', 1, 2000000);
-INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (1, '30', 1, 10000000);
-INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (2, 'Light Switch', 1, 500000);
-INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (5, 'Pigeon!', 1, 100000);
-INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (99, 'ZZZ', 1, 1000000);
+INSERT INTO Album(AlbumID, Title, NumSongs) VALUES (0, '032 Funk', 5);
+INSERT INTO Album(AlbumID, Title, NumSongs) VALUES (1, '30', 10);
+INSERT INTO Album(AlbumID, Title, NumSongs) VALUES (2, 'Light Switch', 1);
+INSERT INTO Album(AlbumID, Title, NumSongs) VALUES (5, 'Pigeon!', 8);
+INSERT INTO Album(AlbumID, Title, NumSongs) VALUES (99, 'ZZZ', 9);
 
 INSERT INTO AlbumHasKeyword (KeywordID, Keyword, AlbumID) VALUES (0, 'Funk', 0);
 INSERT INTO AlbumHasKeyword (KeywordID, Keyword, AlbumID) VALUES (1, 'Celebration', 0);

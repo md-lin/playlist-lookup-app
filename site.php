@@ -28,6 +28,11 @@
 
     <h2>Delete Playlist</h2>
 
+    <form method="GET" action="site.php">
+        <!--refresh page when submitted-->
+        <input type="hidden" id="printPlaylistRequest" name="printPlaylistRequest">
+        <input type="submit" value="Show Playlists" name="printPlaylist"></p>
+    </form>
     <form method="POST" action="site.php">
         <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
         <input type="hidden" id="deletePlaylistRequest" name="deletePlaylistRequest">
@@ -317,6 +322,7 @@
             $tuple
         );
 
+        echo "<br> deleted playlist <br>";
         executeBoundSql("delete from playlist p where p.playlistname= (:bind1)", $alltuples);
         OCICommit($db_conn);
     }
@@ -361,6 +367,15 @@
         $result = executePlainSQL("SELECT * FROM Song");
 
         printResult($result);
+    }
+
+    function handleDisplayPlaylistRequest()
+    {
+        global $db_conn;
+
+        $result = executePlainSQL("SELECT * FROM UserPlaylists");
+
+        printCustomResult($result);
     }
 
     function handleProjectRequest()
@@ -418,6 +433,8 @@
                 handleCountRequest();
             } else if (array_key_exists('printTuples', $_GET)) {
                 handleDisplayRequest();
+            } else if (array_key_exists('printPlaylist', $_GET)) {
+                handleDisplayPlaylistRequest();
             }
 
 
@@ -426,9 +443,10 @@
     }
 
 
-    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['projectSubmit'])) {
+    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
+        || isset($_POST['projectSubmit']) || isset($_POST['deleteSubmit'])) {
         handlePOSTRequest();
-    } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
+    } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples']) || isset($_GET['printPlaylist'])) {
         handleGETRequest();
     }
     ?>
