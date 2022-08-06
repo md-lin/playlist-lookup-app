@@ -207,15 +207,27 @@ VALUES
 INSERT INTO PlaylistIncludesSong
     (PlaylistID, SongID)
 VALUES
-    (0, 0);
+    (0, 2);
 INSERT INTO PlaylistIncludesSong
     (PlaylistID, SongID)
 VALUES
-    (0, 1);
+    (0, 3);
 INSERT INTO PlaylistIncludesSong
     (PlaylistID, SongID)
 VALUES
-    (2, 3);
+    (0, 4);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (1, 2);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (1, 3);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (1, 4);
 INSERT INTO PlaylistIncludesSong
     (PlaylistID, SongID)
 VALUES
@@ -223,7 +235,35 @@ VALUES
 INSERT INTO PlaylistIncludesSong
     (PlaylistID, SongID)
 VALUES
-    (444, 2);
+    (2, 3);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (2, 4);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (3, 2);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (3, 3);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (3, 4);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (4, 2);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (4, 3);
+INSERT INTO PlaylistIncludesSong
+    (PlaylistID, SongID)
+VALUES
+    (4, 4);
 
 -- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
 -- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');

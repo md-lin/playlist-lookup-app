@@ -87,6 +87,16 @@
 
     <hr />
 
+    <h2>Division</h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="divisionRequest" name="divisionRequest">
+        Find titles of songs that are present in all playlists. <br /><br />
+        <p> <input type="submit" value="Find" name="divisionSubmit"></p>
+    </form>
+
+    <hr />
+
     <?php
     //this tells the system that it's no longer just parsing html; it's now parsing PHP
 
@@ -404,6 +414,15 @@
         printCustomResult($result);
     }
 
+    function handleDivisionRequest()
+    {
+        global $db_conn;
+        $result = executePlainSQL("SELECT title
+                                    FROM Song S WHERE NOT EXISTS((SELECT P.PlaylistID FROM UserPlaylists P)
+                                    MINUS (SELECT PS.PlaylistID FROM PlaylistIncludesSong PS WHERE PS.SONGID = S.SONGID))");
+        printCustomResult($result);
+    }
+
     // HANDLE ALL POST ROUTES
     // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
     function handlePOSTRequest()
@@ -421,6 +440,8 @@
                 handleProjectRequest();
             } else if (array_key_exists('groupByRequest', $_POST)) {
                 handleGroupByRequest();
+            } else if (array_key_exists('divisionRequest', $_POST)) {
+                handleDivisionRequest();
             }
 
             disconnectFromDB();
@@ -444,8 +465,11 @@
     }
 
 
-    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
-         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])) {
+    if (
+        isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
+        || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
+        || isset($_POST['divisionSubmit'])
+    ) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
         handleGETRequest();
