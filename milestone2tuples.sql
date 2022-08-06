@@ -67,20 +67,20 @@ VALUES     (69, 'ironcat');
 
 INSERT INTO
     Song (SongID, Genre,Duration, Title)
-VALUES (0, 'Pop', 3, 'Fly');
+VALUES (song_seq.nextval, 'Pop', 3, 'Fly');
  
 INSERT INTO
     Song (SongID, Genre,Duration, Title)
-VALUES (1, 'Rap', 6, 'Never');
+VALUES (song_seq.nextval, 'Rap', 6, 'Never');
  
 INSERT INTO Song (SongID, Genre,Duration, Title)
-VALUES (2, 'Monkey-Trap', 4, 'Auuuugh');
+VALUES (song_seq.nextval, 'Monkey-Trap', 4, 'Auuuugh');
  
 INSERT INTO Song (SongID, Genre,Duration, Title)
-VALUES (3, 'Jazz', 1, 'NAAAAAAAAAAAAAH');
+VALUES (song_seq.nextval, 'Jazz', 1, 'NAAAAAAAAAAAAAH');
  
 INSERT INTO Song (SongID, Genre,Duration, Title)
-VALUES (4, 'Country', 5, 'Country');
+VALUES (song_seq.nextval, 'Country', 5, 'Country');
 
 INSERT INTO UserLikesSong (UserID, SongID)
 VALUES(0, 0);
