@@ -378,7 +378,7 @@
         //finish
         $genre = $_POST['playlistGenre'];
 
-        $result = executePlainSQL("select playlistname, playlistID from userplaylists up, playlistincludessong pis, song s where s.genre = $genre AND up.playlistID = pis.playlistID AND pis.songID = s.songID");
+        $result = executePlainSQL("select distinct playlistname, up.playlistID from userplaylists up, playlistincludessong pis, song s where s.genre = '$genre' AND up.playlistID = pis.playlistID AND pis.songID = s.songID");
 
         printCustomResult($result);
     }
