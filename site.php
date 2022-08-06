@@ -326,7 +326,7 @@
             $tuple
         );
 
-        executeBoundSql("delete from playlist p where p.playlistname= (:bind1)", $alltuples);
+        executeBoundSql("delete from userplaylists p where p.playlistname= (:bind1)", $alltuples);
         OCICommit($db_conn);
     }
 
