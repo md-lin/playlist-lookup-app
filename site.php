@@ -444,7 +444,8 @@
     }
 
 
-    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit'])) {
+    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
+         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
         handleGETRequest();
