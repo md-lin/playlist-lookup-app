@@ -77,6 +77,16 @@
 
     <hr />
 
+    <h2>Join</h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="joinRequest" name = "joinRequest">
+        Find all playlists with genre: <input type = "text" name="playlistGenre">
+        <p><input type="submit" value="Search" name="joinSubmit"></p>
+    </form>
+
+    <hr />
+
     <h2>Aggregation with Group By</h2>
 
     <form method="POST" action="site.php">
@@ -351,6 +361,17 @@
         OCICommit($db_conn);
     }
 
+    function handleJoinRequest()
+    {
+        global $db_conn;
+        //finish
+
+        $result = executePlainSQL(select playlistname, playlistID from userplaylists up, playlistincludessong pis, song s where 
+            s.genre = $_POST['playlistGenre'] AND up.playlistID = pis.playlistID AND pis.songID = s.songID;)
+
+        printCustomResult($result);
+    }
+
     function handleCountRequest()
     {
         global $db_conn;
@@ -421,6 +442,8 @@
                 handleProjectRequest();
             } else if (array_key_exists('groupByRequest', $_POST)) {
                 handleGroupByRequest();
+            } else if (array_key_exists('joinRequest', $_POST)) {
+                handleJoinRequest();
             }
 
             disconnectFromDB();
@@ -445,7 +468,8 @@
 
 
     if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
-         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])) {
+         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
+         || isset($_POST['joinSubmit'])) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
         handleGETRequest();
