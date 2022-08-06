@@ -80,8 +80,8 @@
     <h2>Join</h2>
 
     <form method="POST" action="site.php">
-        <input type="hidden" id="joinRequest" name = "joinRequest">
-        Find all playlists with genre: <input type = "text" name="playlistGenre">
+        <input type="hidden" id="joinRequest" name="joinRequest">
+        Find all playlists with genre: <input type="text" name="playlistGenre">
         <p><input type="submit" value="Search" name="joinSubmit"></p>
     </form>
 
@@ -376,9 +376,9 @@
     {
         global $db_conn;
         //finish
+        $genre = $_POST['playlistGenre'];
 
-        $result = executePlainSQL(select playlistname, playlistID from userplaylists up, playlistincludessong pis, song s where 
-            s.genre = $_POST['playlistGenre'] AND up.playlistID = pis.playlistID AND pis.songID = s.songID;)
+        $result = executePlainSQL("select playlistname, playlistID from userplaylists up, playlistincludessong pis, song s where s.genre = $genre AND up.playlistID = pis.playlistID AND pis.songID = s.songID");
 
         printCustomResult($result);
     }
@@ -492,7 +492,7 @@
     if (
         isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
-        || isset($_POST['divisionSubmit'] || isset($_POST('joinSubmit')))
+        || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit'])
     ) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
