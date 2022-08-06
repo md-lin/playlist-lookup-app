@@ -12,12 +12,11 @@
     <!--update to User once user creates a nickname -->
 
     <h2>Upload Song</h2>
-    <h4> Starred fields are mandatory.</h4>
 
     <form method="POST" action="site.php">
         <!--refresh page when submitted-->
         <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
-        Title*: <input type="text" name="insTitle"> <br /><br />
+        Title: <input type="text" name="insTitle"> <br /><br />
         Duration (in minutes): <input type="text" name="insDuration"> <br /><br />
         Genre: <input type="text" name="insGenre"> <br /><br />
 
@@ -74,6 +73,16 @@
         Duration: <input type="checkbox" name="formProject[]" value="Duration" /> <br />
                 <p>         <input type="submit" value="Project" name="projectSubmit"></p>
         </pre>
+    </form>
+
+    <hr />
+
+    <h2>Aggregation with Group By</h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="groupByRequest" name="groupByRequest">
+        Average duration of songs per genre (in minutes): <br /><br />
+        <p> <input type="submit" value="Show" name="groupBySubmit"></p>
     </form>
 
     <hr />
@@ -388,6 +397,13 @@
         //echo build_table($result);
     }
 
+    function handleGroupByRequest()
+    {
+        global $db_conn;
+        $result = executePlainSQL("Select Genre, Avg(Duration) as Average_Duration From Song Group By Genre");
+        printCustomResult($result);
+    }
+
     // HANDLE ALL POST ROUTES
     // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
     function handlePOSTRequest()
@@ -403,6 +419,8 @@
                 handleDeleteRequest();
             } else if (array_key_exists('projectSongRequest', $_POST)) {
                 handleProjectRequest();
+            } else if (array_key_exists('groupByRequest', $_POST)) {
+                handleGroupByRequest();
             }
 
             disconnectFromDB();
@@ -426,7 +444,7 @@
     }
 
 
-    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['projectSubmit'])) {
+    if (isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit'])) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
         handleGETRequest();
