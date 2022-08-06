@@ -98,6 +98,17 @@
 
     <hr />
 
+    <h2>Aggregation with Having</h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="havingRequest" name="havingRequest">
+        FIND: <br /><br />
+         <!--TODO: UPDATE DESCRIPTION OF FUNCTION-->
+        <p> <input type="submit" value="Find" name="havingSubmit"></p>
+    </form>
+
+    <hr />
+
     <h2>Division</h2>
 
     <form method="POST" action="site.php">
@@ -436,6 +447,14 @@
         printCustomResult($result);
     }
 
+    function handleHavingRequest()
+    {
+        global $db_conn;
+        $result = executePlainSQL("");
+        //TODO: add sql query
+        printCustomResult($result);
+    }
+
     function handleDivisionRequest()
     {
         global $db_conn;
@@ -466,6 +485,8 @@
                 handleDivisionRequest();
             } else if (array_key_exists('joinRequest', $_POST)) {
                 handleJoinRequest();
+            } else if (array_key_exists('havingRequest', $_POST)) {
+                handleHavingRequest();
             }
 
             disconnectFromDB();
@@ -492,7 +513,7 @@
     if (
         isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
-        || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit'])
+        || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit']) || isset($_POST['havingSubmit'])
     ) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
