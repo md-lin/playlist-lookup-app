@@ -98,6 +98,18 @@
 
     <hr />
 
+    <h2>Nested Aggregation</h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="nestedRequest" name="nestedRequest">
+        Find the monthly listener of the most listened artist with monthly listener > 100000,
+        for each genre for which the average monthly listener of the artists who have monthly listeners>100000
+        is higher than the average monthly listeners of all artists across all genres. <br /><br />
+        <p> <input type="submit" value="Find" name="nestedSubmit"></p>
+    </form>
+
+    <hr />
+
     <h2>Division</h2>
 
     <form method="POST" action="site.php">
@@ -445,6 +457,20 @@
         printCustomResult($result);
     }
 
+    function handleNestedRequest()
+    {
+        global $db_conn;
+
+        $result = executePlainSQL("WITH artist_song as(SELECT * FROM ARTIST a , ARTISTCREATESSONG a2 , SONG s WHERE a.USERID = a2.USERID AND a2.SONGID = s.SONGID)
+        SELECT A.genre, MAX(A.MONTHLYLISTENERS) AS Max_Listeners
+        FROM artist_song A
+        WHERE A.MONTHLYLISTENERS > 100000
+        GROUP BY A.Genre
+        HAVING avg(A.MONTHLYLISTENERS) > (Select avg(MONTHLYLISTENERS) From Artist)");
+
+        printCustomResult($result);
+    }
+
     // HANDLE ALL POST ROUTES
     // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
     function handlePOSTRequest()
@@ -466,6 +492,8 @@
                 handleDivisionRequest();
             } else if (array_key_exists('joinRequest', $_POST)) {
                 handleJoinRequest();
+            } else if (array_key_exists('nestedRequest', $_POST)) {
+                handleNestedRequest();
             }
 
             disconnectFromDB();
@@ -492,7 +520,7 @@
     if (
         isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
         || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
-        || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit'])
+        || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit']) | isset($_POST['nestedSubmit'])
     ) {
         handlePOSTRequest();
     } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {

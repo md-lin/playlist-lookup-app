@@ -119,30 +119,30 @@ VALUES
 
 INSERT INTO UserLikesSong
     (UserID, SongID)
-VALUES(0, 0);
+VALUES(0, 3);
 INSERT INTO UserLikesSong
     (UserID, SongID)
-VALUES(0, 1);
-INSERT INTO UserLikesSong
-    (UserID, SongID)
-VALUES
-    (2, 2);
+VALUES(0, 2);
 INSERT INTO UserLikesSong
     (UserID, SongID)
 VALUES
-    (52, 0);
+    (2, 7);
 INSERT INTO UserLikesSong
     (UserID, SongID)
-VALUES(69, 0);
+VALUES
+    (52, 4);
+INSERT INTO UserLikesSong
+    (UserID, SongID)
+VALUES(69, 2);
 
 INSERT INTO SongHasKeyword
     (KeywordID, Keyword, SongID)
 VALUES
-    (0, 'sociopath', 0);
+    (0, 'sociopath', 5);
 INSERT INTO SongHasKeyword
     (KeywordID, Keyword, SongID)
 VALUES
-    (1, 'apathy', 0);
+    (1, 'apathy', 6);
 INSERT INTO SongHasKeyword
     (KeywordID, Keyword, SongID)
 VALUES
@@ -347,15 +347,15 @@ VALUES
 INSERT INTO ArtistCreatesSong
     (UserID, SongID)
 VALUES
-    (0, 3);
+    (5, 8);
 INSERT INTO ArtistCreatesSong
     (UserID, SongID)
 VALUES
-    (0, 5);
+    (1, 13);
 INSERT INTO ArtistCreatesSong
     (UserID, SongID)
 VALUES
-    (3, 4);
+    (2, 7);
 INSERT INTO ArtistCreatesSong
     (UserID, SongID)
 VALUES
