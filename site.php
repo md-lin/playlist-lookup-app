@@ -377,7 +377,7 @@
 
         global $db_conn;
 
-        $result = executePlainSQL("SELECT * FROM Song");
+        $result = executePlainSQL("SELECT * FROM Song Order BY SongID");
 
         printResult($result);
     }
