@@ -48,22 +48,22 @@ VALUES    (52, 'Michelle');
 INSERT INTO ProfileHas (UserID, Nickname)
 VALUES     (69, 'ironcat');
 
-INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
-INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');
-INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (500000, 'Gold');
-INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (1000000, 'Platinum');
-INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (100000, 'None');
+-- INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
+-- INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');
+-- INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (500000, 'Gold');
+-- INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (1000000, 'Platinum');
+-- INSERT INTO StreamSongCertification (NumStreams, Certification) VALUES (100000, 'None');
 
-INSERT INTO LyricsTitle(Lyrics, Title) VALUES
-('Fly','Baby Shark');
-INSERT INTO LyricsTitle(Lyrics, Title) VALUES
-('Never','Never ');
-INSERT INTO LyricsTitle(Lyrics, Title) VALUES
-('Auuuugh','ARRRRRGH');
-INSERT INTO LyricsTitle(Lyrics, Title) VALUES
-('NAAAAAAAAAAAAAH','Trumpet Boiii');
-INSERT INTO LyricsTitle(Lyrics, Title) VALUES
-('Country','Country Road');
+-- INSERT INTO LyricsTitle(Lyrics, Title) VALUES
+-- ('Fly','Baby Shark');
+-- INSERT INTO LyricsTitle(Lyrics, Title) VALUES
+-- ('Never','Never ');
+-- INSERT INTO LyricsTitle(Lyrics, Title) VALUES
+-- ('Auuuugh','ARRRRRGH');
+-- INSERT INTO LyricsTitle(Lyrics, Title) VALUES
+-- ('NAAAAAAAAAAAAAH','Trumpet Boiii');
+-- INSERT INTO LyricsTitle(Lyrics, Title) VALUES
+-- ('Country','Country Road');
 
 INSERT INTO
     Song (SongID, Genre,Duration,Lyrics,NumStreams)
@@ -111,29 +111,29 @@ INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (2, 2);
 INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (52, 3);
 INSERT INTO UserHasUserPlaylists (UserID, PlaylistID) VALUES (52, 4);
 
-INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (0, 0);
-INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (1, 1);
-INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (2, 2);
-INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (3, 3);
-INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (444, 4);
+-- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (0, 0);
+-- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (1, 1);
+-- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (2, 2);
+-- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (3, 3);
+-- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (444, 4);
     
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (0, 0);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (0, 1);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (2, 3);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (2, 2);
-INSERT INTO PlaylistContentIncludesSong (ContentID, SongID) VALUES (444, 2);
+INSERT INTO PlaylistIncludesSong (PlaylistID, SongID) VALUES (0, 0);
+INSERT INTO PlaylistIncludesSong (PlaylistID, SongID) VALUES (0, 1);
+INSERT INTO PlaylistIncludesSong (PlaylistID, SongID) VALUES (2, 3);
+INSERT INTO PlaylistIncludesSong (PlaylistID, SongID) VALUES (2, 2);
+INSERT INTO PlaylistIncludesSong (PlaylistID, SongID) VALUES (444, 2);
     
-INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
-INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');
-INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (500000, 'Gold');
-INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (1000000, 'Platinum');
-INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (100000, 'None');
+-- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
+-- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');
+-- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (500000, 'Gold');
+-- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (1000000, 'Platinum');
+-- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (100000, 'None');
 
-INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('032 Funk', 1, '01-APR-21', 5);
-INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('30', 1, '16-MAY-20', 10);
-INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('Light Switch', 1, '30-MAR-22', 1);
-INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('Pigeon!', 1, '25-FEB-22', 8);
-INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('ZZZ', 1, '16-NOV-18', 9);
+-- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('032 Funk', 1, '01-APR-21', 5);
+-- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('30', 1, '16-MAY-20', 10);
+-- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('Light Switch', 1, '30-MAR-22', 1);
+-- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('Pigeon!', 1, '25-FEB-22', 8);
+-- INSERT INTO TitleRelease(Title, AlbumVersion, ReleaseDate, NumSongs) VALUES ('ZZZ', 1, '16-NOV-18', 9);
 
 INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (0, '032 Funk', 1, 2000000);
 INSERT INTO Album(AlbumID, Title, AlbumVersion, NumStreams) VALUES (1, '30', 1, 10000000);
