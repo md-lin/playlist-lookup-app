@@ -81,7 +81,7 @@
 
     <form method="POST" action="site.php">
         <input type="hidden" id="joinRequest" name="joinRequest">
-        Find all playlists with genre: <input type="text" name="playlistGenre">
+        Find all playlist having songs with a genre: <input type="text" name="playlistGenre">
         <p><input type="submit" value="Search" name="joinSubmit"></p>
     </form>
 
