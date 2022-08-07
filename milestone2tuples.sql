@@ -15,42 +15,47 @@ INSERT INTO Listener
 VALUES( 69, 'nice@hotmail.com', 420, 'Monkey-Trap');
 
 INSERT INTO Artist
-    (UserID, Email, MonthlyListeners)
+    (UserID, Email, MonthlyListeners, StageName)
 VALUES
     (
         0,
         'holyheck@gmail.com',
-        1630928
+        1630928,
+        'Rahul Shandilya'
     );
 INSERT INTO Artist
-    (UserID, Email, MonthlyListeners)
+    (UserID, Email, MonthlyListeners, StageName)
 VALUES
     (
         3,
         'shandilya@gmail.com',
-        250
+        250,
+        'Fujii Kaze'
     );
 INSERT INTO Artist
-    (UserID, Email, MonthlyListeners)
+    (UserID, Email, MonthlyListeners, StageName)
 VALUES
     (
         4,
         'ilovedolphins@outlook.com',
-        1205304
+        1205304,
+        'Zion. T'
     );
 INSERT INTO Artist
-    (UserID, Email, MonthlyListeners)
+    (UserID, Email, MonthlyListeners, StageName)
 VALUES(
         5,
         'ihatedolphins@hotmail.com',
-        340792
+        340792,
+        'Eminem'
     );
 INSERT INTO Artist
-    (UserID, Email, MonthlyListeners)
+    (UserID, Email, MonthlyListeners, StageName)
 VALUES(
         6,
         'imaboomer@yahoo.com',
-        1
+        1,
+        'Lil Nas X'
     );
 
 INSERT INTO ProfileHas

@@ -10,7 +10,9 @@ CREATE TABLE Artist
 (
     UserID INTEGER PRIMARY KEY,
     Email VARCHAR(50),
-    MonthlyListeners INTEGER
+    MonthlyListeners INTEGER,
+    StageName VARCHAR(30)
+
 );
 
 CREATE TABLE ProfileHas

@@ -102,7 +102,7 @@
 
     <form method="POST" action="site.php">
         <input type="hidden" id="havingRequest" name="havingRequest">
-        FIND: <br /><br />
+        Find average duration of songs by artists who have created more than one song: <br /><br />
          <!--TODO: UPDATE DESCRIPTION OF FUNCTION-->
         <p> <input type="submit" value="Find" name="havingSubmit"></p>
 
@@ -462,7 +462,11 @@
     function handleHavingRequest()
     {
         global $db_conn;
-        $result = executePlainSQL("");
+        $result = executePlainSQL("SELECT AVG(s.DURATION) AS \"Average Song Duration (Minutes) \", a.STAGENAME AS \" Artist Name \" , a.USERID AS \" UserID \"
+        FROM ARTIST a, ARTISTCREATESSONG acs, SONG s 
+        WHERE a.USERID = acs.USERID AND s.SONGID = acs.SONGID 
+        GROUP BY a.USERID, a.STAGENAME
+        HAVING COUNT(acs.SONGID) > 1 ");
         //TODO: add sql query
         printCustomResult($result);
     }
