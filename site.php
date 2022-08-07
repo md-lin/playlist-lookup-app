@@ -277,9 +277,6 @@
             echo "</td>";
 
             while ($row = oci_fetch_assoc($result)) {
-
-                //print_r($row);
-
                 echo "<tr>";
                 echo "<td>";
                 echo implode("</td><td>", $row);
@@ -445,15 +442,9 @@
 
             $new_att = join(",", $attributes);
 
-            //echo ($new_att);
-            //echo ("SELECT $new_att FROM Song");
-
             $result = executePlainSQL("SELECT $new_att FROM Song");
 
-            //echo ($result[0]);
             printCustomResult($result);
-            // printResult($result);
-            //echo build_table($result);
         }
 
         function handleGroupByRequest()
