@@ -61,6 +61,15 @@
 
     <hr />
 
+    <h2>Selection </h2>
+
+    <form method="POST" action="site.php">
+        <input type="hidden" id="selectionRequest" name="selectionRequest">
+        <p><input type="submit" value="Show" name="selectionSubmit"></p>
+    </form>
+
+    <hr />
+
     <h2>Projection from Song table</h2>
 
     <form method="POST" action="site.php">
@@ -257,11 +266,6 @@
             echo "<thead>";
             echo  "<tr>";
             echo  "<th>";
-            // foreach (array_keys($row) as $array_key) {
-            //     if ((string)(int)$array_key != $array_key) {
-            //         echo "</th><th>$array_key";
-            //     }
-            // }
             echo implode("</th><th>", array_keys($row));
             echo "</th>";
             echo "</tr>";
@@ -494,6 +498,11 @@
             printCustomResult($result);
         }
 
+        function handleSelectionRequest()
+        {
+            global $db_conn;
+        }
+
         // HANDLE ALL POST ROUTES
         // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
         function handlePOSTRequest()
@@ -519,6 +528,8 @@
                     handleHavingRequest();
                 } else if (array_key_exists('nestedRequest', $_POST)) {
                     handleNestedRequest();
+                } else if (array_key_exists('selectionRequest', $_POST)) {
+                    handleSelectionRequest();
                 }
 
                 disconnectFromDB();
@@ -543,7 +554,7 @@
 
 
         if (
-            isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit'])
+            isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['selectionSubmit'])
             || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
             || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit']) || isset($_POST['havingSubmit'])
             || isset($_POST['nestedSubmit'])
