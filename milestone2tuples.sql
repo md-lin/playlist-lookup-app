@@ -94,28 +94,63 @@ INSERT INTO
     Song
     (SongID, Genre,Duration, Title)
 VALUES
-    (song_seq.nextval, 'Pop', 3, 'Fly');
+    (2, 'Pop', 4.21, 'Despacito');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (3, 'Rap', 3.23, 'Yeah');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (4, 'Pop', 5.6, 'Hello');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (5, 'Pop', 3.7, 'Baby');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (6, 'Pop', 2.21, 'Stay');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (7, 'Disco', 4.2, 'Journey');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (8, 'Jazz', 6.9, 'Blues');
+INSERT INTO
+    Song
+    (SongID, Genre,Duration, Title)
+VALUES
+    (9, 'Pop', 3, 'Fly');
 
 INSERT INTO
     Song
     (SongID, Genre,Duration, Title)
 VALUES
-    (song_seq.nextval, 'Rap', 6, 'Never');
+    (10, 'Rap', 6, 'Never');
 
 INSERT INTO Song
     (SongID, Genre,Duration, Title)
 VALUES
-    (song_seq.nextval, 'Monkey-Trap', 4, 'Auuuugh');
+    (11, 'Monkey-Trap', 4, 'Auuuugh');
 
 INSERT INTO Song
     (SongID, Genre,Duration, Title)
 VALUES
-    (song_seq.nextval, 'Jazz', 1, 'NAAAAAAAAAAAAAH');
+    (12, 'Jazz', 1, 'NAAAAAAAAAAAAAH');
 
 INSERT INTO Song
     (SongID, Genre,Duration, Title)
 VALUES
-    (song_seq.nextval, 'Country', 5, 'Country');
+    (13, 'Country', 5, 'Country');
 
 INSERT INTO UserLikesSong
     (UserID, SongID)
@@ -360,6 +395,18 @@ INSERT INTO ArtistCreatesSong
     (UserID, SongID)
 VALUES
     (4, 3);
+INSERT INTO ArtistCreatesSong
+    (UserID, SongID)
+VALUES
+    (5, 12);
+INSERT INTO ArtistCreatesSong
+    (UserID, SongID)
+VALUES
+    (4, 10);
+INSERT INTO ArtistCreatesSong
+    (UserID, SongID)
+VALUES
+    (0, 6);
 
 INSERT INTO ArtistHasAlbum
     (UserID, AlbumID)
