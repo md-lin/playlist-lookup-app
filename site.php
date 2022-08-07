@@ -65,6 +65,12 @@
 
     <form method="POST" action="site.php">
         <input type="hidden" id="selectionRequest" name="selectionRequest">
+        <label for="tables">Choose to view:</label>
+        <select name="table-select" id="table-select">
+        <option value="song">Songs</option>
+        <option value="album">Albums</option>
+        <option value="playlist">Playlists</option>
+        </select>
         <p><input type="submit" value="Show" name="selectionSubmit"></p>
     </form>
 
