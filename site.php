@@ -406,18 +406,6 @@ table, th, td {
             OCICommit($db_conn);
         }
 
-        function handleResetRequest()
-        {
-            global $db_conn;
-            // Drop old table
-            executePlainSQL("DROP TABLE demoTable");
-
-            // Create new table
-            echo "<br> creating new table <br>";
-            executePlainSQL("CREATE TABLE demoTable (id int PRIMARY KEY, name char(30))");
-            OCICommit($db_conn);
-        }
-
         function handleDeleteRequest()
         {
             global $db_conn;
@@ -557,9 +545,7 @@ table, th, td {
         function handlePOSTRequest()
         {
             if (connectToDB()) {
-                if (array_key_exists('resetTablesRequest', $_POST)) {
-                    handleResetRequest();
-                } else if (array_key_exists('updateQueryRequest', $_POST)) {
+                if (array_key_exists('updateQueryRequest', $_POST)) {
                     handleUpdateRequest();
                 } else if (array_key_exists('insertQueryRequest', $_POST)) {
                     handleInsertRequest();
@@ -603,7 +589,7 @@ table, th, td {
 
 
         if (
-            isset($_POST['reset']) || isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['selectionSubmit'])
+            isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['selectionSubmit'])
             || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
             || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit']) || isset($_POST['havingSubmit'])
             || isset($_POST['nestedSubmit'])
