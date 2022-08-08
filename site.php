@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
 <head>
     <meta charset="utf-8">
     <title>CPSC 304 Project</title>
@@ -71,6 +78,53 @@
         <option value="album">Albums</option>
         <option value="playlist">Playlists</option>
         </select>
+        <br/>
+        <table>
+  <tr>
+    <td><b><ins>Song</ins></b></td>
+    <td><b>Title</b></td>
+    <td><b>Genre</b></td>
+    <td><b>Duration (Minutes)</b></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Search: <input type="text" name="selectSongTitleLike"></td>
+    <td>Search: <input type="text" name="selectGenre"></td>
+    <td>0-3 <input type="radio" name="selectDuration" value=""> 
+    <!-- TODO include values for selectduration so that the button can go directly into the query
+        i.e. <= 3 / >=3 AND <5 / >= 5 -->
+        3-5 <input type="radio" name="selectDuration" >
+        5+<input type="radio" name="selectDuration" ></td>
+  </tr>
+  <tr>
+    <td><b><ins>Album</ins></b></td>
+    <td><b>Title</b></td>
+    <td><b>Number of Songs</b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>  </td>
+    <td>Search: <input type="text" name="selectAlbumTitleLike"></td>
+    <td>1<input type="radio" name="selectNumSongs" value=""> 
+    <!-- TODO include values for selectduration so that the button can go directly into the query
+        i.e. <= 3 / >=3 AND <5 / >= 5 -->
+        1-5 <input type="radio" name="selectNumSongs" >
+        5+<input type="radio" name="selectNumSongs" ></td>
+    <td></td>
+</tr>
+<tr>
+    <td><b><ins>Playlist</ins></b></td>
+    <td><b>Playlist Name</b></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td>Search: <input type="text" name="selectNameLike"></td>
+    <td></td>
+    <td></td>
+</tr>
+</table>
         <p><input type="submit" value="Show" name="selectionSubmit"></p>
     </form>
 
@@ -118,7 +172,6 @@
     <form method="POST" action="site.php">
         <input type="hidden" id="havingRequest" name="havingRequest">
         Find average duration of songs by artists who have created more than one song: <br /><br />
-        <!--TODO: UPDATE DESCRIPTION OF FUNCTION-->
         <p> <input type="submit" value="Find" name="havingSubmit"></p>
 
         <hr />
@@ -468,7 +521,6 @@
             WHERE a.USERID = acs.USERID AND s.SONGID = acs.SONGID 
             GROUP BY a.USERID, a.STAGENAME
             HAVING COUNT(acs.SONGID) > 1 ");
-            //TODO: add sql query
             printCustomResult($result);
         }
 
