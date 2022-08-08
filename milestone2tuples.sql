@@ -217,6 +217,10 @@ INSERT INTO UserPlaylists
 VALUES
     (4, 'fine');
 
+INSERT INTO UserPlaylists
+VALUES
+    (5, 'happy times');
+
 INSERT INTO UserHasUserPlaylists
     (UserID, PlaylistID)
 VALUES
@@ -337,6 +341,8 @@ INSERT INTO Album
     (AlbumID, Title, NumSongs)
 VALUES
     (99, 'ZZZ', 9);
+INSERT INTO Album
+Values (6, 'Funky Business', 1);
 
 INSERT INTO AlbumHasKeyword
     (KeywordID, Keyword, AlbumID)

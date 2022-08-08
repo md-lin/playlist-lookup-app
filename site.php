@@ -76,8 +76,10 @@ table, th, td {
         <select name="table-select" id="table-select">
         <option value="song">Songs</option>
         <option value="album">Albums</option>
-        <option value="playlist">Playlists</option>
+        <option value="userplaylists">Playlists</option>
         </select>
+        <br/>
+        Enter viewing criteria in table below:
         <br/>
         <table>
   <tr>
@@ -93,8 +95,8 @@ table, th, td {
     <td>0-3 <input type="radio" name="selectDuration" value=""> 
     <!-- TODO include values for selectduration so that the button can go directly into the query
         i.e. <= 3 / >=3 AND <5 / >= 5 -->
-        3-5 <input type="radio" name="selectDuration" >
-        5+<input type="radio" name="selectDuration" ></td>
+        3-5 <input type="radio" name="selectDuration" value="">
+        5+<input type="radio" name="selectDuration" value=""></td>
   </tr>
   <tr>
     <td><b><ins>Album</ins></b></td>
@@ -108,8 +110,8 @@ table, th, td {
     <td>1<input type="radio" name="selectNumSongs" value=""> 
     <!-- TODO include values for selectduration so that the button can go directly into the query
         i.e. <= 3 / >=3 AND <5 / >= 5 -->
-        1-5 <input type="radio" name="selectNumSongs" >
-        5+<input type="radio" name="selectNumSongs" ></td>
+        2-5 <input type="radio" name="selectNumSongs" value="">
+        6+<input type="radio" name="selectNumSongs" value=""></td>
     <td></td>
 </tr>
 <tr>
@@ -538,6 +540,12 @@ table, th, td {
         function handleSelectionRequest()
         {
             global $db_conn;
+
+            $table = $_POST['table-select'];
+
+            $result = executePlainSQL("select * from $table");
+            //$result = executeBoundSQL();
+            printCustomResult($result);
         }
 
         // HANDLE ALL POST ROUTES
