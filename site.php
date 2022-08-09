@@ -98,11 +98,9 @@ table, th, td {
     <td></td>
     <td>Search: <input type="text" name="selectSongTitleLike"></td>
     <td>Search: <input type="text" name="selectGenre"></td>
-    <td>0-3 <input type="radio" name="selectDuration" value=""> 
-    <!-- TODO include values for selectduration so that the button can go directly into the query
-        i.e. <= 3 / >=3 AND <5 / >= 5 -->
-        3-5 <input type="radio" name="selectDuration" value="">
-        5+<input type="radio" name="selectDuration" value=""></td>
+    <td>0-3 <input type="radio" name="selectDuration" value="<=3"> 
+        3-5 <input type="radio" name="selectDuration" value=">= 3 AND duration < 5">
+        5+<input type="radio" name="selectDuration" value=">= 5"></td>
   </tr>
   <tr>
     <td><b><ins>Album</ins></b></td>
@@ -114,8 +112,6 @@ table, th, td {
     <td>  </td>
     <td>Search: <input type="text" name="selectAlbumTitleLike"></td>
     <td>1<input type="radio" name="selectNumSongs" value="=1"> 
-    <!-- TODO include values for selectduration so that the button can go directly into the query
-        i.e. <= 3 / >=3 AND <5 / >= 5 -->
         2-5 <input type="radio" name="selectNumSongs" value=">2 AND numSongs <6" >
         6+<input type="radio" name="selectNumSongs" value="> 5"></td>
     <td></td>
@@ -614,6 +610,8 @@ table, th, td {
 
         function handleSelectionRequest()
         {
+            //TODO: divide $attribute array creation into functions
+            //TODO: clean handling for userplaylists and album
             global $db_conn;
 
             $table = $_POST['table-select'];
@@ -621,6 +619,9 @@ table, th, td {
             $playlistName = $_POST['selectNameLike'];
             $albumName = $_POST['selectAlbumTitleLike'];
             $albumNumSongs = $_POST['selectNumSongs'];
+            $songTitle = $_POST['selectSongTitleLike'];
+            $songGenre = $_POST['selectGenre'];
+            $songDuration = $_POST['selectDuration'];
 
             if ($table == "userplaylists") {
                 $attributes = array("playlistid");
@@ -635,8 +636,20 @@ table, th, td {
                     $result = executePlainSQL("select $attributes from userplaylists");
                 }
             } else if ($table == "song") {
-                $result = executePlainSQL("select * from song");
+                $attributes = array("songid");
+
+                if (IsChecked('formSong', 'title')) array_push($attributes, 'title');
+                if (IsChecked('formSong', 'genre')) array_push($attributes, 'genre');
+                if (IsChecked('formSong', 'duration')) array_push($attributes, 'duration');
+
+                $attributes = join(",", $attributes);
+
                 //TODO: complete options for song handling
+                if (!empty($songTitle) || !empty($songGenre) || isset($songDuration)) {
+
+                } else {
+                    $result = executePlainSQL("select $attributes from song");
+                }
             } else if ($table == "album") {
                 $attributes = array("albumid");
 
