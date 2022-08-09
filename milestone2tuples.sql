@@ -241,6 +241,9 @@ INSERT INTO UserHasUserPlaylists
     (UserID, PlaylistID)
 VALUES
     (52, 4);
+INSERT INTO UserHasUserPlaylists
+VALUES  
+    (52, 5);
 
 -- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (0, 0);
 -- INSERT INTO PlaylistContent (ContentID, PlaylistID) VALUES (1, 1);
@@ -308,6 +311,16 @@ INSERT INTO PlaylistIncludesSong
     (PlaylistID, SongID)
 VALUES
     (4, 4);
+INSERT INTO PlaylistIncludesSong
+VALUES
+    (5, 2);
+INSERT INTO PlaylistIncludesSong
+VALUES
+    (5, 3);
+INSERT INTO PlaylistIncludesSong
+VALUES
+    (5, 4);
+
 
 -- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (10000000, 'Diamond');
 -- INSERT INTO StreamAlbumCertification (NumStreams, Certification) VALUES (2000000, 'Multi-Platinum');
