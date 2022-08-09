@@ -113,11 +113,11 @@ table, th, td {
   <tr>
     <td>  </td>
     <td>Search: <input type="text" name="selectAlbumTitleLike"></td>
-    <td>1<input type="radio" name="selectNumSongs" value=""> 
+    <td>1<input type="radio" name="selectNumSongs" value="=1"> 
     <!-- TODO include values for selectduration so that the button can go directly into the query
         i.e. <= 3 / >=3 AND <5 / >= 5 -->
-        2-5 <input type="radio" name="selectNumSongs" value="">
-        6+<input type="radio" name="selectNumSongs" value=""></td>
+        2-5 <input type="radio" name="selectNumSongs" value=">2 AND numSongs <6" >
+        6+<input type="radio" name="selectNumSongs" value="> 5"></td>
     <td></td>
 </tr>
 <tr>
@@ -603,11 +603,11 @@ table, th, td {
             global $db_conn;
 
             $result = executePlainSQL("WITH artist_song as(SELECT * FROM ARTIST a , ARTISTCREATESSONG a2 , SONG s WHERE a.USERID = a2.USERID AND a2.SONGID = s.SONGID)
-        SELECT A.genre, MAX(A.MONTHLYLISTENERS) AS Max_Listeners
-        FROM artist_song A
-        WHERE A.MONTHLYLISTENERS > 100000
-        GROUP BY A.Genre
-        HAVING avg(A.MONTHLYLISTENERS) > (Select avg(MONTHLYLISTENERS) From Artist)");
+                SELECT A.genre, MAX(A.MONTHLYLISTENERS) AS Max_Listeners
+                FROM artist_song A
+                WHERE A.MONTHLYLISTENERS > 100000
+                GROUP BY A.Genre
+                HAVING avg(A.MONTHLYLISTENERS) > (Select avg(MONTHLYLISTENERS) From Artist)");
 
             printCustomResult($result);
         }
@@ -619,18 +619,32 @@ table, th, td {
             $table = $_POST['table-select'];
             $result;
             $playlistName = $_POST['selectNameLike'];
+            $albumName = $_POST['selectAlbumTitleLike'];
+            $albumNumSongs = $_POST['selectNumSongs'];
 
-            if ($table = 'userplaylists') {
+            if ($table == "userplaylists") {
                 if (!empty($playlistName)) {
                     $result = executePlainSQL("select playlistname AS \"Playlist Names\" FROM userplaylists
                         WHERE playlistname LIKE '%$playlistName%'");
                 } else {
                     $result = executePlainSQL("select playlistname AS \"Playlist Names\" from userplaylists");
                 }
-            } else if ($table = 'song') {
+            } else if ($table == "song") {
 
-            } else if ($table = 'album') {
-
+            } else if ($table == "album") {
+                if (!empty($albumName)) {
+                    if (isset($albumNumSongs)) {
+                        $result = executePlainSQL("select * from album WHERE numsongs $albumNumSongs AND title LIKE '%$albumName%'");
+                    } else {
+                        $result = executePlainSQL("select * from album WHERE title LIKE '%$albumName%'");
+                    }
+                } else {
+                    if (isset($albumNumSongs)) {
+                        $result = executePlainSQL("select * from album WHERE numsongs $albumNumSongs");
+                    } else {
+                        $result = executePlainSQL("select * from album");
+                    }
+                }
             }
             //$result = executePlainSQL("select * from $table");
             //$result = executeBoundSQL();
