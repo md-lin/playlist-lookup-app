@@ -27,6 +27,24 @@ INSERT INTO Artist
     (UserID, Email, MonthlyListeners, StageName)
 VALUES
     (
+        1,
+        'k@gmail.com',
+        168,
+        'Charlie Puth'
+    );
+INSERT INTO Artist
+    (UserID, Email, MonthlyListeners, StageName)
+VALUES
+    (
+        2,
+        'he@gmail.com',
+        928,
+        'Dua Lipa'
+    );        
+INSERT INTO Artist
+    (UserID, Email, MonthlyListeners, StageName)
+VALUES
+    (
         3,
         'shandilya@gmail.com',
         250,

@@ -12,7 +12,6 @@ CREATE TABLE Artist
     Email VARCHAR(50),
     MonthlyListeners INTEGER,
     StageName VARCHAR(30)
-
 );
 
 CREATE TABLE ProfileHas

@@ -85,14 +85,15 @@ table, th, td {
         <option value="userplaylists">Playlists</option>
         </select>
         <br/>
-        Select attributes to view and potential search criteria below:
         <br/>
+        Select attributes to view and potential search criteria below:
         <table>
   <tr>
     <td><b><ins>Song</ins></b></td>
     <td><b><input type="checkbox" name="formSong[]" value="title"> Title </b></td>
     <td><b><input type="checkbox" name="formSong[]" value="genre">Genre </b></td>
     <td><b><input type="checkbox" name="formSong[]" value="duration">Duration (Minutes) </b></td>
+    <br/>
   </tr>
   <tr>
     <td></td>
@@ -647,7 +648,7 @@ table, th, td {
                 //TODO: complete options for song handling
                 if (!empty($songTitle) || !empty($songGenre) || isset($songDuration)) {
                     $songAttributes = array();
-                    if (!empty($songTitle)) array_push($songAttributes, "title = '".$songTitle."'");
+                    if (!empty($songTitle)) array_push($songAttributes, "title LIKE '%".$songTitle."%'");
                     if (!empty($songGenre)) array_push($songAttributes, "genre = '".$songGenre."'");
                     if (isset($songDuration)) array_push($songAttributes, $songDuration);
                     $songAttributes = join(" AND ", $songAttributes);
