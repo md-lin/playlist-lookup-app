@@ -34,6 +34,12 @@ table, th, td {
 
     <h2>Delete Playlist</h2>
 
+    <form method="GET" action="site.php">
+        <!--refresh page when submitted-->
+        <input type="hidden" id="printPlaylistsRequest" name="printPlaylistsRequest">
+        <input type="submit" value="Show All Playlists" name="printPlaylists"></p>
+    </form>
+
     <form method="POST" action="site.php">
         <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
         <input type="hidden" id="deletePlaylistRequest" name="deletePlaylistRequest">
@@ -348,6 +354,60 @@ table, th, td {
             echo "</table>";
         }
 
+        function printTwoTables($result1, $result2) {
+            echo "<br/>Retrieved user playlists:<br/><br/>";
+            $row1 = oci_fetch_assoc($result1);
+            echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+            echo "<thead>";
+            echo  "<tr>";
+            echo  "<th>";
+            echo implode("</th><th>", array_keys($row1));
+            echo "</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            echo "<tr>";
+            echo "<td>";
+            echo implode("</td><td>", $row1);
+            echo "</td>";
+
+            while ($row1 = oci_fetch_assoc($result1)) {
+                echo "<tr>";
+                echo "<td>";
+                echo implode("</td><td>", $row1);
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table>";
+
+            echo "<br/>Retrieved playlist-song associations:<br/><br/>";
+            $row2 = oci_fetch_assoc($result2);
+            echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+            echo "<thead>";
+            echo  "<tr>";
+            echo  "<th>";
+            echo implode("</th><th>", array_keys($row2));
+            echo "</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            echo "<tr>";
+            echo "<td>";
+            echo implode("</td><td>", $row2);
+            echo "</td>";
+
+            while ($row2 = oci_fetch_assoc($result2)) {
+                echo "<tr>";
+                echo "<td>";
+                echo implode("</td><td>", $row2);
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table>";
+        }
+
         function connectToDB()
         {
             global $db_conn;
@@ -469,12 +529,27 @@ table, th, td {
 
         function handleDisplayRequest()
         {
-
             global $db_conn;
 
             $result = executePlainSQL("SELECT * FROM Song Order BY SongID");
 
             printResult($result);
+        }
+
+        function handlePlaylistDisplayRequest()
+        {
+            global $db_conn;
+
+            $result = executePlainSQL("select * from userplaylists");
+
+            $result1 = executePlainSQL("select * from userplaylists up, userhasuserplaylists uhup WHERE
+                uhup.playlistID = up.playlistID");
+
+            $result2 = executePlainSQL("select * from userplaylists up, playlistincludessong pis WHERE
+                up.playlistID = pis.playlistID");
+
+            printCustomResult($result);
+            printTwoTables($result1, $result2);
         }
 
         function handleProjectRequest()
@@ -552,6 +627,10 @@ table, th, td {
                 } else {
                     $result = executePlainSQL("select playlistname AS \"Playlist Names\" from userplaylists");
                 }
+            } else if ($table = 'song') {
+
+            } else if ($table = 'album') {
+
             }
             //$result = executePlainSQL("select * from $table");
             //$result = executeBoundSQL();
@@ -598,6 +677,8 @@ table, th, td {
                     handleCountRequest();
                 } else if (array_key_exists('printTuples', $_GET)) {
                     handleDisplayRequest();
+                } else if (array_key_exists('printPlaylists', $_GET)) {
+                    handlePlaylistDisplayRequest();
                 }
 
 
@@ -613,7 +694,7 @@ table, th, td {
             || isset($_POST['nestedSubmit'])
         ) {
             handlePOSTRequest();
-        } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples'])) {
+        } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples']) || isset($_GET['printPlaylists'])) {
             handleGETRequest();
         }
         ?>
