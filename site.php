@@ -2,10 +2,12 @@
 <html>
 
 <style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
 </style>
 
 <head>
@@ -80,56 +82,56 @@ table, th, td {
         <input type="hidden" id="selectionRequest" name="selectionRequest">
         <label for="tables">Choose to view:</label>
         <select name="table-select" id="table-select">
-        <option value="song">Songs</option>
-        <option value="album">Albums</option>
-        <option value="userplaylists">Playlists</option>
+            <option value="song">Songs</option>
+            <option value="album">Albums</option>
+            <option value="userplaylists">Playlists</option>
         </select>
-        <br/>
-        <br/>
+        <br />
+        <br />
         Select attributes to view and potential search criteria below:
         <table>
-  <tr>
-    <td><b><ins>Song</ins></b></td>
-    <td><b><input type="checkbox" name="formSong[]" value="title"> Title </b></td>
-    <td><b><input type="checkbox" name="formSong[]" value="genre">Genre </b></td>
-    <td><b><input type="checkbox" name="formSong[]" value="duration">Duration (Minutes) </b></td>
-    <br/>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Search: <input type="text" name="selectSongTitleLike"></td>
-    <td>Search: <input type="text" name="selectGenre"></td>
-    <td>0-3 <input type="radio" name="selectDuration" value="duration <=3"> 
-        3-5 <input type="radio" name="selectDuration" value="duration >= 3 AND duration < 5">
-        5+<input type="radio" name="selectDuration" value="duration >= 5"></td>
-  </tr>
-  <tr>
-    <td><b><ins>Album</ins></b></td>
-    <td><b><input type="checkbox" name="formAlbum[]" value="title">Title</b></td>
-    <td><b><input type="checkbox" name="formAlbum[]" value="numSongs">Number of Songs</b></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>  </td>
-    <td>Search: <input type="text" name="selectAlbumTitleLike"></td>
-    <td>1<input type="radio" name="selectNumSongs" value="=1"> 
-        2-5 <input type="radio" name="selectNumSongs" value=">2 AND numSongs <6" >
-        6+<input type="radio" name="selectNumSongs" value="> 5"></td>
-    <td></td>
-</tr>
-<tr>
-    <td><b><ins>Playlist</ins></b></td>
-    <td><b><input type="checkbox" name="formPlaylist[]" value="name">Playlist Name</b></td>
-    <td></td>
-    <td></td>
-</tr>
-<tr>
-    <td></td>
-    <td>Search: <input type="text" name="selectNameLike"></td>
-    <td></td>
-    <td></td>
-</tr>
-</table>
+            <tr>
+                <td><b><ins>Song</ins></b></td>
+                <td><b><input type="checkbox" name="formSong[]" value="title"> Title </b></td>
+                <td><b><input type="checkbox" name="formSong[]" value="genre">Genre </b></td>
+                <td><b><input type="checkbox" name="formSong[]" value="duration">Duration (Minutes) </b></td>
+                <br />
+            </tr>
+            <tr>
+                <td></td>
+                <td>Search: <input type="text" name="selectSongTitleLike"></td>
+                <td>Search: <input type="text" name="selectGenre"></td>
+                <td>0-3 <input type="radio" name="selectDuration" value="duration <=3">
+                    3-5 <input type="radio" name="selectDuration" value="duration >= 3 AND duration < 5">
+                    5+<input type="radio" name="selectDuration" value="duration >= 5"></td>
+            </tr>
+            <tr>
+                <td><b><ins>Album</ins></b></td>
+                <td><b><input type="checkbox" name="formAlbum[]" value="title">Title</b></td>
+                <td><b><input type="checkbox" name="formAlbum[]" value="numSongs">Number of Songs</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td>Search: <input type="text" name="selectAlbumTitleLike"></td>
+                <td>1<input type="radio" name="selectNumSongs" value="=1">
+                    2-5 <input type="radio" name="selectNumSongs" value=">2 AND numSongs <6">
+                    6+<input type="radio" name="selectNumSongs" value="> 5"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b><ins>Playlist</ins></b></td>
+                <td><b><input type="checkbox" name="formPlaylist[]" value="name">Playlist Name</b></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Search: <input type="text" name="selectNameLike"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
         <p><input type="submit" value="Show" name="selectionSubmit"></p>
     </form>
 
@@ -178,569 +180,571 @@ table, th, td {
         <input type="hidden" id="havingRequest" name="havingRequest">
         Find average duration of songs by artists who have created more than one song: <br /><br />
         <p> <input type="submit" value="Find" name="havingSubmit"></p>
+    </form>
 
-        <hr />
+    <hr />
 
-        <h2>Nested Aggregation</h2>
+    <h2>Nested Aggregation</h2>
 
-        <form method="POST" action="site.php">
-            <input type="hidden" id="nestedRequest" name="nestedRequest">
-            Find the monthly listener of the most listened artist with monthly listener > 100000,
-            for each genre for which the average monthly listener of the artists who have monthly listeners>100000
-            is higher than the average monthly listeners of all artists across all genres. <br /><br />
-            <p> <input type="submit" value="Find" name="nestedSubmit"></p>
+    <form method="POST" action="site.php">
+        <input type="hidden" id="nestedRequest" name="nestedRequest">
+        Find the monthly listener of the most listened artist with monthly listener > 100000,
+        for each genre for which the average monthly listener of the artists who have monthly listeners>100000
+        is higher than the average monthly listeners of all artists across all genres. <br /><br />
+        <p> <input type="submit" value="Find" name="nestedSubmit"></p>
 
-        </form>
+    </form>
 
-        <hr />
+    <hr />
 
-        <h2>Division</h2>
+    <h2>Division</h2>
 
-        <form method="POST" action="site.php">
-            <input type="hidden" id="divisionRequest" name="divisionRequest">
-            Find titles of songs that are present in all playlists. <br /><br />
-            <p> <input type="submit" value="Find" name="divisionSubmit"></p>
-        </form>
+    <form method="POST" action="site.php">
+        <input type="hidden" id="divisionRequest" name="divisionRequest">
+        Find titles of songs that are present in all playlists. <br /><br />
+        <p> <input type="submit" value="Find" name="divisionSubmit"></p>
+    </form>
 
-        <hr />
+    <hr />
 
-        <?php
-        //this tells the system that it's no longer just parsing html; it's now parsing PHP
+    <?php
+    //this tells the system that it's no longer just parsing html; it's now parsing PHP
 
-        $success = True; //keep track of errors so it redirects the page only if there are no errors
-        $db_conn = NULL; // edit the login credentials in connectToDB()
-        $show_debug_alert_messages = False; // set to True if you want alerts to show you which methods are being triggered (see how it is used in debugAlertMessage())
+    $success = True; //keep track of errors so it redirects the page only if there are no errors
+    $db_conn = NULL; // edit the login credentials in connectToDB()
+    $show_debug_alert_messages = False; // set to True if you want alerts to show you which methods are being triggered (see how it is used in debugAlertMessage())
 
-        function debugAlertMessage($message)
-        {
-            global $show_debug_alert_messages;
+    function debugAlertMessage($message)
+    {
+        global $show_debug_alert_messages;
 
-            if ($show_debug_alert_messages) {
-                echo "<script type='text/javascript'>alert('" . $message . "');</script>";
-            }
+        if ($show_debug_alert_messages) {
+            echo "<script type='text/javascript'>alert('" . $message . "');</script>";
+        }
+    }
+
+    function executePlainSQL($cmdstr)
+    { //takes a plain (no bound variables) SQL command and executes it
+        //echo "<br>running ".$cmdstr."<br>";
+        global $db_conn, $success;
+
+        $statement = OCIParse($db_conn, $cmdstr);
+        //There are a set of comments at the end of the file that describe some of the OCI specific functions and how they work
+
+        if (!$statement) {
+            echo "<br>Cannot parse the following command: " . $cmdstr . "<br>";
+            $e = OCI_Error($db_conn); // For OCIParse errors pass the connection handle
+            echo htmlentities($e['message']);
+            $success = False;
         }
 
-        function executePlainSQL($cmdstr)
-        { //takes a plain (no bound variables) SQL command and executes it
-            //echo "<br>running ".$cmdstr."<br>";
-            global $db_conn, $success;
+        $r = OCIExecute($statement, OCI_DEFAULT);
+        if (!$r) {
+            echo "<br>Cannot execute the following command: " . $cmdstr . "<br>";
+            $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
+            echo htmlentities($e['message']);
+            $success = False;
+        }
 
-            $statement = OCIParse($db_conn, $cmdstr);
-            //There are a set of comments at the end of the file that describe some of the OCI specific functions and how they work
+        return $statement;
+    }
 
-            if (!$statement) {
-                echo "<br>Cannot parse the following command: " . $cmdstr . "<br>";
-                $e = OCI_Error($db_conn); // For OCIParse errors pass the connection handle
-                echo htmlentities($e['message']);
-                $success = False;
+    function executeBoundSQL($cmdstr, $list)
+    {
+        /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
+		In this case you don't need to create the statement several times. Bound variables cause a statement to only be
+		parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection.
+		See the sample code below for how this function is used */
+
+        global $db_conn, $success;
+        $statement = OCIParse($db_conn, $cmdstr);
+
+        if (!$statement) {
+            echo "<br>Cannot parse the following command: " . $cmdstr . "<br>";
+            $e = OCI_Error($db_conn);
+            echo htmlentities($e['message']);
+            $success = False;
+        }
+
+        foreach ($list as $tuple) {
+            foreach ($tuple as $bind => $val) {
+                //echo $val;
+                //echo "<br>".$bind."<br>";
+                OCIBindByName($statement, $bind, $val);
+                unset($val); //make sure you do not remove this. Otherwise $val will remain in an array object wrapper which will not be recognized by Oracle as a proper datatype
             }
 
             $r = OCIExecute($statement, OCI_DEFAULT);
             if (!$r) {
                 echo "<br>Cannot execute the following command: " . $cmdstr . "<br>";
-                $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
+                $e = OCI_Error($statement); // For OCIExecute errors, pass the statementhandle
                 echo htmlentities($e['message']);
+                echo "<br>";
                 $success = False;
             }
+        }
+    }
 
-            return $statement;
+    function printResult($result)
+    { //prints results from a select statement
+        echo "<br/>Retrieved data from table Song:<br/><br/>";
+        echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+        echo "<tr><th>SongID</th><th>Title</th><th>Genre</th><th>Duration</th></tr>";
+
+        while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+            echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>";
         }
 
-        function executeBoundSQL($cmdstr, $list)
-        {
-            /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
-		In this case you don't need to create the statement several times. Bound variables cause a statement to only be
-		parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection.
-		See the sample code below for how this function is used */
+        echo "</table>";
+    }
 
-            global $db_conn, $success;
-            $statement = OCIParse($db_conn, $cmdstr);
 
-            if (!$statement) {
-                echo "<br>Cannot parse the following command: " . $cmdstr . "<br>";
-                $e = OCI_Error($db_conn);
-                echo htmlentities($e['message']);
-                $success = False;
-            }
-
-            foreach ($list as $tuple) {
-                foreach ($tuple as $bind => $val) {
-                    //echo $val;
-                    //echo "<br>".$bind."<br>";
-                    OCIBindByName($statement, $bind, $val);
-                    unset($val); //make sure you do not remove this. Otherwise $val will remain in an array object wrapper which will not be recognized by Oracle as a proper datatype
-                }
-
-                $r = OCIExecute($statement, OCI_DEFAULT);
-                if (!$r) {
-                    echo "<br>Cannot execute the following command: " . $cmdstr . "<br>";
-                    $e = OCI_Error($statement); // For OCIExecute errors, pass the statementhandle
-                    echo htmlentities($e['message']);
-                    echo "<br>";
-                    $success = False;
-                }
-            }
+    function build_table($array)
+    {
+        // start table
+        $html = '<table>';
+        // header row
+        $html .= '<tr>';
+        foreach ($array[0] as $key => $value) {
+            $html .= '<th>' . htmlspecialchars($key) . '</th>';
         }
+        $html .= '</tr>';
 
-        function printResult($result)
-        { //prints results from a select statement
-            echo "<br/>Retrieved data from table Song:<br/><br/>";
-            echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
-            echo "<tr><th>SongID</th><th>Title</th><th>Genre</th><th>Duration</th></tr>";
-
-            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>";
-            }
-
-            echo "</table>";
-        }
-
-
-        function build_table($array)
-        {
-            // start table
-            $html = '<table>';
-            // header row
+        // data rows
+        foreach ($array as $key => $value) {
             $html .= '<tr>';
-            foreach ($array[0] as $key => $value) {
-                $html .= '<th>' . htmlspecialchars($key) . '</th>';
+            foreach ($value as $key2 => $value2) {
+                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
             }
             $html .= '</tr>';
-
-            // data rows
-            foreach ($array as $key => $value) {
-                $html .= '<tr>';
-                foreach ($value as $key2 => $value2) {
-                    $html .= '<td>' . htmlspecialchars($value2) . '</td>';
-                }
-                $html .= '</tr>';
-            }
-
-            // finish table and return it
-
-            $html .= '</table>';
-            return $html;
         }
 
-        function printCustomResult($result)
-        {
-            echo "<br/>Retrieved data:<br/><br/>";
-            $row = oci_fetch_assoc($result);
-            echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
-            echo "<thead>";
-            echo  "<tr>";
-            echo  "<th>";
-            echo implode("</th><th>", array_keys($row));
-            echo "</th>";
-            echo "</tr>";
-            echo "</thead>";
-            echo "<tbody>";
+        // finish table and return it
+
+        $html .= '</table>';
+        return $html;
+    }
+
+    function printCustomResult($result)
+    {
+        echo "<br/>Retrieved data:<br/><br/>";
+        $row = oci_fetch_assoc($result);
+        echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+        echo "<thead>";
+        echo  "<tr>";
+        echo  "<th>";
+        echo implode("</th><th>", array_keys($row));
+        echo "</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        echo "<tr>";
+        echo "<td>";
+        echo implode("</td><td>", $row);
+        echo "</td>";
+
+        while ($row = oci_fetch_assoc($result)) {
             echo "<tr>";
             echo "<td>";
             echo implode("</td><td>", $row);
             echo "</td>";
-
-            while ($row = oci_fetch_assoc($result)) {
-                echo "<tr>";
-                echo "<td>";
-                echo implode("</td><td>", $row);
-                echo "</td>";
-                echo "</tr>";
-            }
-            echo "</tbody>";
-            echo "</table>";
-        }
-
-        function printTwoTables($result1, $result2) {
-            echo "<br/>Retrieved user playlists:<br/><br/>";
-            $row1 = oci_fetch_assoc($result1);
-            echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
-            echo "<thead>";
-            echo  "<tr>";
-            echo  "<th>";
-            echo implode("</th><th>", array_keys($row1));
-            echo "</th>";
             echo "</tr>";
-            echo "</thead>";
-            echo "<tbody>";
+        }
+        echo "</tbody>";
+        echo "</table>";
+    }
+
+    function printTwoTables($result1, $result2)
+    {
+        echo "<br/>Retrieved user playlists:<br/><br/>";
+        $row1 = oci_fetch_assoc($result1);
+        echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+        echo "<thead>";
+        echo  "<tr>";
+        echo  "<th>";
+        echo implode("</th><th>", array_keys($row1));
+        echo "</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        echo "<tr>";
+        echo "<td>";
+        echo implode("</td><td>", $row1);
+        echo "</td>";
+
+        while ($row1 = oci_fetch_assoc($result1)) {
             echo "<tr>";
             echo "<td>";
             echo implode("</td><td>", $row1);
             echo "</td>";
-
-            while ($row1 = oci_fetch_assoc($result1)) {
-                echo "<tr>";
-                echo "<td>";
-                echo implode("</td><td>", $row1);
-                echo "</td>";
-                echo "</tr>";
-            }
-            echo "</tbody>";
-            echo "</table>";
-
-            echo "<br/>Retrieved playlist-song associations:<br/><br/>";
-            $row2 = oci_fetch_assoc($result2);
-            echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
-            echo "<thead>";
-            echo  "<tr>";
-            echo  "<th>";
-            echo implode("</th><th>", array_keys($row2));
-            echo "</th>";
             echo "</tr>";
-            echo "</thead>";
-            echo "<tbody>";
+        }
+        echo "</tbody>";
+        echo "</table>";
+
+        echo "<br/>Retrieved playlist-song associations:<br/><br/>";
+        $row2 = oci_fetch_assoc($result2);
+        echo "<table border='1' width='600' cellpadding='3' cellspacing='3'>";
+        echo "<thead>";
+        echo  "<tr>";
+        echo  "<th>";
+        echo implode("</th><th>", array_keys($row2));
+        echo "</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+        echo "<tr>";
+        echo "<td>";
+        echo implode("</td><td>", $row2);
+        echo "</td>";
+
+        while ($row2 = oci_fetch_assoc($result2)) {
             echo "<tr>";
             echo "<td>";
             echo implode("</td><td>", $row2);
             echo "</td>";
-
-            while ($row2 = oci_fetch_assoc($result2)) {
-                echo "<tr>";
-                echo "<td>";
-                echo implode("</td><td>", $row2);
-                echo "</td>";
-                echo "</tr>";
-            }
-            echo "</tbody>";
-            echo "</table>";
+            echo "</tr>";
         }
+        echo "</tbody>";
+        echo "</table>";
+    }
 
-        function connectToDB()
-        {
-            global $db_conn;
+    function connectToDB()
+    {
+        global $db_conn;
 
-            // Your username is ora_(CWL_ID) and the password is a(student number). For example,
-            // ora_platypus is the username and a12345678 is the password.
-            $db_conn = OCILogon("ora_srahul14", "a63475768", "dbhost.students.cs.ubc.ca:1522/stu");
+        // Your username is ora_(CWL_ID) and the password is a(student number). For example,
+        // ora_platypus is the username and a12345678 is the password.
+        $db_conn = OCILogon("ora_srahul14", "a63475768", "dbhost.students.cs.ubc.ca:1522/stu");
 
-            if ($db_conn) {
-                debugAlertMessage("Database is Connected");
-                return true;
-            } else {
-                debugAlertMessage("Cannot connect to Database");
-                $e = OCI_Error(); // For OCILogon errors pass no handle
-                echo htmlentities($e['message']);
-                return false;
-            }
-        }
-
-        function disconnectFromDB()
-        {
-            global $db_conn;
-
-            debugAlertMessage("Disconnect from Database");
-            OCILogoff($db_conn);
-        }
-
-        function IsChecked($chkname, $value)
-        {
-            if (!empty($_POST[$chkname])) {
-                foreach ($_POST[$chkname] as $chkval) {
-                    if ($chkval == $value) {
-                        return true;
-                    }
-                }
-            }
+        if ($db_conn) {
+            debugAlertMessage("Database is Connected");
+            return true;
+        } else {
+            debugAlertMessage("Cannot connect to Database");
+            $e = OCI_Error(); // For OCILogon errors pass no handle
+            echo htmlentities($e['message']);
             return false;
         }
+    }
 
-        function handleUpdateRequest()
-        {
-            global $db_conn;
+    function disconnectFromDB()
+    {
+        global $db_conn;
 
-            $tuple = array(
-                ":bind1" => $_POST['songID_upd'],
-                ":bind2" => $_POST['new_Title'],
-                ":bind3" => $_POST['new_Genre'],
-                ":bind4" => $_POST['new_Duration']
-            );
+        debugAlertMessage("Disconnect from Database");
+        OCILogoff($db_conn);
+    }
 
-            $alltuples = array(
-                $tuple
-            );
-
-            if (IsChecked('formUpdate', 'Title')) executeBoundSQL("update Song set Title=:bind2 where SONGID=:bind1", $alltuples);
-            if (IsChecked('formUpdate', 'Genre')) executeBoundSQL("update Song set Genre=:bind3 where SONGID=:bind1", $alltuples);
-            if (IsChecked('formUpdate', 'Duration')) executeBoundSQL("update Song set Duration=:bind4 where SONGID=:bind1", $alltuples);
-            OCICommit($db_conn);
-        }
-
-        function handleDeleteRequest()
-        {
-            global $db_conn;
-
-            $tuple = array(
-                ":bind1" => $_POST['deletePlaylistName']
-            );
-
-            $alltuples = array(
-                $tuple
-            );
-
-            executeBoundSql("delete from userplaylists p where p.playlistname= (:bind1)", $alltuples);
-            OCICommit($db_conn);
-        }
-
-        function handleInsertRequest()
-        {
-            global $db_conn, $success;
-
-            //Getting the values from user and insert data into the table
-            $tuple = array(
-                ":bind1" => $_POST['insTitle'],
-                ":bind2" => $_POST['insDuration'],
-                ":bind3" => $_POST['insGenre']
-            );
-
-            $alltuples = array(
-                $tuple
-            );
-
-
-            executeBoundSQL("insert into song (SongID, Title, Duration, Genre) values (song_seq.nextval,:bind1, :bind2, :bind3)", $alltuples);
-
-            OCICommit($db_conn);
-        }
-
-        function handleJoinRequest()
-        {
-            global $db_conn;
-            //finish
-            $genre = $_POST['playlistGenre'];
-
-            $result = executePlainSQL("select distinct playlistname, up.playlistID from userplaylists up, playlistincludessong pis, song s where s.genre = '$genre' AND up.playlistID = pis.playlistID AND pis.songID = s.songID");
-
-            printCustomResult($result);
-        }
-
-        function handleCountRequest()
-        {
-            global $db_conn;
-
-            $result = executePlainSQL("SELECT Count(*) FROM Song");
-
-            if (($row = oci_fetch_row($result)) != false) {
-                echo "<br> The number of tuples in Song table: " . $row[0] . "<br>";
+    function IsChecked($chkname, $value)
+    {
+        if (!empty($_POST[$chkname])) {
+            foreach ($_POST[$chkname] as $chkval) {
+                if ($chkval == $value) {
+                    return true;
+                }
             }
         }
+        return false;
+    }
 
-        function handleDisplayRequest()
-        {
-            global $db_conn;
+    function handleUpdateRequest()
+    {
+        global $db_conn;
 
-            $result = executePlainSQL("SELECT * FROM Song Order BY SongID");
+        $tuple = array(
+            ":bind1" => $_POST['songID_upd'],
+            ":bind2" => $_POST['new_Title'],
+            ":bind3" => $_POST['new_Genre'],
+            ":bind4" => $_POST['new_Duration']
+        );
 
-            printResult($result);
+        $alltuples = array(
+            $tuple
+        );
+
+        if (IsChecked('formUpdate', 'Title')) executeBoundSQL("update Song set Title=:bind2 where SONGID=:bind1", $alltuples);
+        if (IsChecked('formUpdate', 'Genre')) executeBoundSQL("update Song set Genre=:bind3 where SONGID=:bind1", $alltuples);
+        if (IsChecked('formUpdate', 'Duration')) executeBoundSQL("update Song set Duration=:bind4 where SONGID=:bind1", $alltuples);
+        OCICommit($db_conn);
+    }
+
+    function handleDeleteRequest()
+    {
+        global $db_conn;
+
+        $tuple = array(
+            ":bind1" => $_POST['deletePlaylistName']
+        );
+
+        $alltuples = array(
+            $tuple
+        );
+
+        executeBoundSql("delete from userplaylists p where p.playlistname= (:bind1)", $alltuples);
+        OCICommit($db_conn);
+    }
+
+    function handleInsertRequest()
+    {
+        global $db_conn, $success;
+
+        //Getting the values from user and insert data into the table
+        $tuple = array(
+            ":bind1" => $_POST['insTitle'],
+            ":bind2" => $_POST['insDuration'],
+            ":bind3" => $_POST['insGenre']
+        );
+
+        $alltuples = array(
+            $tuple
+        );
+
+
+        executeBoundSQL("insert into song (SongID, Title, Duration, Genre) values (song_seq.nextval,:bind1, :bind2, :bind3)", $alltuples);
+
+        OCICommit($db_conn);
+    }
+
+    function handleJoinRequest()
+    {
+        global $db_conn;
+        //finish
+        $genre = $_POST['playlistGenre'];
+
+        $result = executePlainSQL("select distinct playlistname, up.playlistID from userplaylists up, playlistincludessong pis, song s where s.genre = '$genre' AND up.playlistID = pis.playlistID AND pis.songID = s.songID");
+
+        printCustomResult($result);
+    }
+
+    function handleCountRequest()
+    {
+        global $db_conn;
+
+        $result = executePlainSQL("SELECT Count(*) FROM Song");
+
+        if (($row = oci_fetch_row($result)) != false) {
+            echo "<br> The number of tuples in Song table: " . $row[0] . "<br>";
         }
+    }
 
-        function handlePlaylistDisplayRequest()
-        {
-            global $db_conn;
+    function handleDisplayRequest()
+    {
+        global $db_conn;
 
-            $result = executePlainSQL("select * from userplaylists");
+        $result = executePlainSQL("SELECT * FROM Song Order BY SongID");
 
-            $result1 = executePlainSQL("select * from userplaylists up, userhasuserplaylists uhup WHERE
+        printResult($result);
+    }
+
+    function handlePlaylistDisplayRequest()
+    {
+        global $db_conn;
+
+        $result = executePlainSQL("select * from userplaylists");
+
+        $result1 = executePlainSQL("select * from userplaylists up, userhasuserplaylists uhup WHERE
                 uhup.playlistID = up.playlistID");
 
-            $result2 = executePlainSQL("select * from userplaylists up, playlistincludessong pis WHERE
+        $result2 = executePlainSQL("select * from userplaylists up, playlistincludessong pis WHERE
                 up.playlistID = pis.playlistID");
 
-            printCustomResult($result);
-            printTwoTables($result1, $result2);
-        }
+        printCustomResult($result);
+        printTwoTables($result1, $result2);
+    }
 
-        function handleProjectRequest()
-        {
+    function handleProjectRequest()
+    {
 
-            global $db_conn;
+        global $db_conn;
 
-            $attributes = array();
+        $attributes = array();
 
-            if (IsChecked('formProject', 'SongID')) array_push($attributes, 'SongID');
-            if (IsChecked('formProject', 'Title')) array_push($attributes, 'Title');
-            if (IsChecked('formProject', 'Genre')) array_push($attributes, 'Genre');
-            if (IsChecked('formProject', 'Duration')) array_push($attributes, 'Duration');
+        if (IsChecked('formProject', 'SongID')) array_push($attributes, 'SongID');
+        if (IsChecked('formProject', 'Title')) array_push($attributes, 'Title');
+        if (IsChecked('formProject', 'Genre')) array_push($attributes, 'Genre');
+        if (IsChecked('formProject', 'Duration')) array_push($attributes, 'Duration');
 
-            $new_att = join(",", $attributes);
+        $new_att = join(",", $attributes);
 
-            $result = executePlainSQL("SELECT $new_att FROM Song");
+        $result = executePlainSQL("SELECT $new_att FROM Song");
 
-            printCustomResult($result);
-        }
+        printCustomResult($result);
+    }
 
-        function handleGroupByRequest()
-        {
-            global $db_conn;
-            $result = executePlainSQL("Select Genre, Avg(Duration) as Average_Duration From Song Group By Genre");
-            printCustomResult($result);
-        }
+    function handleGroupByRequest()
+    {
+        global $db_conn;
+        $result = executePlainSQL("Select Genre, Avg(Duration) as Average_Duration From Song Group By Genre");
+        printCustomResult($result);
+    }
 
-        function handleHavingRequest()
-        {
-            global $db_conn;
-            $result = executePlainSQL("SELECT a.USERID AS \" UserID \", a.STAGENAME AS \" Artist Name \", AVG(s.DURATION) AS \"Average Song Duration (Minutes) \"
+    function handleHavingRequest()
+    {
+        global $db_conn;
+        $result = executePlainSQL("SELECT a.USERID AS \" UserID \", a.STAGENAME AS \" Artist Name \", AVG(s.DURATION) AS \"Average Song Duration (Minutes) \"
             FROM ARTIST a, ARTISTCREATESSONG acs, SONG s 
             WHERE a.USERID = acs.USERID AND s.SONGID = acs.SONGID 
             GROUP BY a.USERID, a.STAGENAME
             HAVING COUNT(acs.SONGID) > 1 ");
-            printCustomResult($result);
-        }
+        printCustomResult($result);
+    }
 
-        function handleDivisionRequest()
-        {
-            global $db_conn;
-            $result = executePlainSQL("SELECT title
+    function handleDivisionRequest()
+    {
+        global $db_conn;
+        $result = executePlainSQL("SELECT title
                                     FROM Song S WHERE NOT EXISTS((SELECT P.PlaylistID FROM UserPlaylists P)
                                     MINUS (SELECT PS.PlaylistID FROM PlaylistIncludesSong PS WHERE PS.SONGID = S.SONGID))");
-            printCustomResult($result);
-        }
+        printCustomResult($result);
+    }
 
-        function handleNestedRequest()
-        {
-            global $db_conn;
+    function handleNestedRequest()
+    {
+        global $db_conn;
 
-            $result = executePlainSQL("WITH artist_song as(SELECT * FROM ARTIST a , ARTISTCREATESSONG a2 , SONG s WHERE a.USERID = a2.USERID AND a2.SONGID = s.SONGID)
+        $result = executePlainSQL("WITH artist_song as(SELECT * FROM ARTIST a , ARTISTCREATESSONG a2 , SONG s WHERE a.USERID = a2.USERID AND a2.SONGID = s.SONGID)
                 SELECT A.genre, MAX(A.MONTHLYLISTENERS) AS Max_Listeners
                 FROM artist_song A
                 WHERE A.MONTHLYLISTENERS > 100000
                 GROUP BY A.Genre
                 HAVING avg(A.MONTHLYLISTENERS) > (Select avg(MONTHLYLISTENERS) From Artist)");
 
-            printCustomResult($result);
-        }
+        printCustomResult($result);
+    }
 
-        function handleSelectionRequest()
-        {
-            //TODO: divide $attribute array creation into functions
-            //TODO: clean handling for userplaylists and album
-            global $db_conn;
+    function handleSelectionRequest()
+    {
+        //TODO: divide $attribute array creation into functions
+        //TODO: clean handling for userplaylists and album
+        global $db_conn;
 
-            $table = $_POST['table-select'];
-            $result;
-            $playlistName = $_POST['selectNameLike'];
-            $albumName = $_POST['selectAlbumTitleLike'];
-            $albumNumSongs = $_POST['selectNumSongs'];
-            $songTitle = $_POST['selectSongTitleLike'];
-            $songGenre = $_POST['selectGenre'];
-            $songDuration = $_POST['selectDuration'];
+        $table = $_POST['table-select'];
+        //$result;
+        $playlistName = $_POST['selectNameLike'];
+        $albumName = $_POST['selectAlbumTitleLike'];
+        $albumNumSongs = $_POST['selectNumSongs'];
+        $songTitle = $_POST['selectSongTitleLike'];
+        $songGenre = $_POST['selectGenre'];
+        $songDuration = $_POST['selectDuration'];
 
-            if ($table == "userplaylists") {
-                $attributes = array("playlistid");
+        if ($table == "userplaylists") {
+            $attributes = array("playlistid");
 
-                if (IsChecked('formPlaylist', 'name')) array_push($attributes, 'playlistname AS "Playlist Names"');
+            if (IsChecked('formPlaylist', 'name')) array_push($attributes, 'playlistname AS "Playlist Names"');
 
-                $attributes = join(",", $attributes);
-                if (!empty($playlistName)) {
-                    $result = executePlainSQL("select $attributes FROM userplaylists
+            $attributes = join(",", $attributes);
+            if (!empty($playlistName)) {
+                $result = executePlainSQL("select $attributes FROM userplaylists
                         WHERE playlistname LIKE '%$playlistName%'");
+            } else {
+                $result = executePlainSQL("select $attributes from userplaylists");
+            }
+        } else if ($table == "song") {
+            $attributes = array("songid");
+
+            if (IsChecked('formSong', 'title')) array_push($attributes, 'title');
+            if (IsChecked('formSong', 'genre')) array_push($attributes, 'genre');
+            if (IsChecked('formSong', 'duration')) array_push($attributes, 'duration');
+
+            $attributes = join(",", $attributes);
+
+            //TODO: complete options for song handling
+            if (!empty($songTitle) || !empty($songGenre) || isset($songDuration)) {
+                $songAttributes = array();
+                if (!empty($songTitle)) array_push($songAttributes, "title LIKE '%" . $songTitle . "%'");
+                if (!empty($songGenre)) array_push($songAttributes, "genre = '" . $songGenre . "'");
+                if (isset($songDuration)) array_push($songAttributes, $songDuration);
+                $songAttributes = join(" AND ", $songAttributes);
+                $result = executePlainSQL("select $attributes from song WHERE $songAttributes");
+            } else {
+                $result = executePlainSQL("select $attributes from song");
+            }
+        } else if ($table == "album") {
+            $attributes = array("albumid");
+
+            if (IsChecked('formAlbum', 'title')) array_push($attributes, 'title');
+            if (IsChecked('formAlbum', 'numSongs')) array_push($attributes, 'numsongs');
+
+            $attributes = join(",", $attributes);
+            if (!empty($albumName)) {
+                if (isset($albumNumSongs)) {
+                    $result = executePlainSQL("select $attributes from album WHERE numsongs $albumNumSongs AND title LIKE '%$albumName%'");
                 } else {
-                    $result = executePlainSQL("select $attributes from userplaylists");
+                    $result = executePlainSQL("select $attributes from album WHERE title LIKE '%$albumName%'");
                 }
-            } else if ($table == "song") {
-                $attributes = array("songid");
-
-                if (IsChecked('formSong', 'title')) array_push($attributes, 'title');
-                if (IsChecked('formSong', 'genre')) array_push($attributes, 'genre');
-                if (IsChecked('formSong', 'duration')) array_push($attributes, 'duration');
-
-                $attributes = join(",", $attributes);
-
-                //TODO: complete options for song handling
-                if (!empty($songTitle) || !empty($songGenre) || isset($songDuration)) {
-                    $songAttributes = array();
-                    if (!empty($songTitle)) array_push($songAttributes, "title LIKE '%".$songTitle."%'");
-                    if (!empty($songGenre)) array_push($songAttributes, "genre = '".$songGenre."'");
-                    if (isset($songDuration)) array_push($songAttributes, $songDuration);
-                    $songAttributes = join(" AND ", $songAttributes);
-                    $result = executePlainSQL("select $attributes from song WHERE $songAttributes");
+            } else {
+                if (isset($albumNumSongs)) {
+                    $result = executePlainSQL("select $attributes from album WHERE numsongs $albumNumSongs");
                 } else {
-                    $result = executePlainSQL("select $attributes from song");
-                }
-            } else if ($table == "album") {
-                $attributes = array("albumid");
-
-                if (IsChecked('formAlbum', 'title')) array_push($attributes, 'title');
-                if (IsChecked('formAlbum', 'numSongs')) array_push($attributes, 'numsongs');
-
-                $attributes = join(",", $attributes);
-                if (!empty($albumName)) {
-                    if (isset($albumNumSongs)) {
-                        $result = executePlainSQL("select $attributes from album WHERE numsongs $albumNumSongs AND title LIKE '%$albumName%'");
-                    } else {
-                        $result = executePlainSQL("select $attributes from album WHERE title LIKE '%$albumName%'");
-                    }
-                } else {
-                    if (isset($albumNumSongs)) {
-                        $result = executePlainSQL("select $attributes from album WHERE numsongs $albumNumSongs");
-                    } else {
-                        $result = executePlainSQL("select $attributes from album");
-                    }
+                    $result = executePlainSQL("select $attributes from album");
                 }
             }
-            printCustomResult($result);
         }
+        printCustomResult($result);
+    }
 
-        // HANDLE ALL POST ROUTES
-        // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
-        function handlePOSTRequest()
-        {
-            if (connectToDB()) {
-                if (array_key_exists('updateQueryRequest', $_POST)) {
-                    handleUpdateRequest();
-                } else if (array_key_exists('insertQueryRequest', $_POST)) {
-                    handleInsertRequest();
-                } else if (array_key_exists('deletePlaylistRequest', $_POST)) {
-                    handleDeleteRequest();
-                } else if (array_key_exists('projectSongRequest', $_POST)) {
-                    handleProjectRequest();
-                } else if (array_key_exists('groupByRequest', $_POST)) {
-                    handleGroupByRequest();
-                } else if (array_key_exists('divisionRequest', $_POST)) {
-                    handleDivisionRequest();
-                } else if (array_key_exists('joinRequest', $_POST)) {
-                    handleJoinRequest();
-                } else if (array_key_exists('havingRequest', $_POST)) {
-                    handleHavingRequest();
-                } else if (array_key_exists('nestedRequest', $_POST)) {
-                    handleNestedRequest();
-                } else if (array_key_exists('selectionRequest', $_POST)) {
-                    handleSelectionRequest();
-                }
-
-                disconnectFromDB();
+    // HANDLE ALL POST ROUTES
+    // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
+    function handlePOSTRequest()
+    {
+        if (connectToDB()) {
+            if (array_key_exists('updateQueryRequest', $_POST)) {
+                handleUpdateRequest();
+            } else if (array_key_exists('insertQueryRequest', $_POST)) {
+                handleInsertRequest();
+            } else if (array_key_exists('deletePlaylistRequest', $_POST)) {
+                handleDeleteRequest();
+            } else if (array_key_exists('projectSongRequest', $_POST)) {
+                handleProjectRequest();
+            } else if (array_key_exists('groupByRequest', $_POST)) {
+                handleGroupByRequest();
+            } else if (array_key_exists('divisionRequest', $_POST)) {
+                handleDivisionRequest();
+            } else if (array_key_exists('joinRequest', $_POST)) {
+                handleJoinRequest();
+            } else if (array_key_exists('havingRequest', $_POST)) {
+                handleHavingRequest();
+            } else if (array_key_exists('nestedRequest', $_POST)) {
+                handleNestedRequest();
+            } else if (array_key_exists('selectionRequest', $_POST)) {
+                handleSelectionRequest();
             }
+
+            disconnectFromDB();
         }
+    }
 
-        // HANDLE ALL GET ROUTES
-        // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
-        function handleGETRequest()
-        {
-            if (connectToDB()) {
-                if (array_key_exists('countTuples', $_GET)) {
-                    handleCountRequest();
-                } else if (array_key_exists('printTuples', $_GET)) {
-                    handleDisplayRequest();
-                } else if (array_key_exists('printPlaylists', $_GET)) {
-                    handlePlaylistDisplayRequest();
-                }
-
-
-                disconnectFromDB();
+    // HANDLE ALL GET ROUTES
+    // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
+    function handleGETRequest()
+    {
+        if (connectToDB()) {
+            if (array_key_exists('countTuples', $_GET)) {
+                handleCountRequest();
+            } else if (array_key_exists('printTuples', $_GET)) {
+                handleDisplayRequest();
+            } else if (array_key_exists('printPlaylists', $_GET)) {
+                handlePlaylistDisplayRequest();
             }
-        }
 
 
-        if (
-            isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['selectionSubmit'])
-            || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
-            || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit']) || isset($_POST['havingSubmit'])
-            || isset($_POST['nestedSubmit'])
-        ) {
-            handlePOSTRequest();
-        } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples']) || isset($_GET['printPlaylists'])) {
-            handleGETRequest();
+            disconnectFromDB();
         }
-        ?>
+    }
+
+
+    if (
+        isset($_POST['updateSubmit']) || isset($_POST['insertSubmit']) || isset($_POST['selectionSubmit'])
+        || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit']) || isset($_POST['deleteSubmit'])
+        || isset($_POST['divisionSubmit']) || isset($_POST['joinSubmit']) || isset($_POST['havingSubmit'])
+        || isset($_POST['nestedSubmit'])
+    ) {
+        handlePOSTRequest();
+    } else if (isset($_GET['countTupleRequest']) || isset($_GET['printTuples']) || isset($_GET['printPlaylists'])) {
+        handleGETRequest();
+    }
+    ?>
 </body>
 
 </html>
