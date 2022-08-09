@@ -542,8 +542,18 @@ table, th, td {
             global $db_conn;
 
             $table = $_POST['table-select'];
+            $result;
+            $playlistName = $_POST['selectNameLike'];
 
-            $result = executePlainSQL("select * from $table");
+            if ($table = 'userplaylists') {
+                if (!empty($playlistName)) {
+                    $result = executePlainSQL("select playlistname AS \"Playlist Names\" FROM userplaylists
+                        WHERE playlistname LIKE '%$playlistName%'");
+                } else {
+                    $result = executePlainSQL("select playlistname AS \"Playlist Names\" from userplaylists");
+                }
+            }
+            //$result = executePlainSQL("select * from $table");
             //$result = executeBoundSQL();
             printCustomResult($result);
         }
