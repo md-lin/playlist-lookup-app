@@ -98,9 +98,9 @@ table, th, td {
     <td></td>
     <td>Search: <input type="text" name="selectSongTitleLike"></td>
     <td>Search: <input type="text" name="selectGenre"></td>
-    <td>0-3 <input type="radio" name="selectDuration" value="<=3"> 
-        3-5 <input type="radio" name="selectDuration" value=">= 3 AND duration < 5">
-        5+<input type="radio" name="selectDuration" value=">= 5"></td>
+    <td>0-3 <input type="radio" name="selectDuration" value="duration <=3"> 
+        3-5 <input type="radio" name="selectDuration" value="duration >= 3 AND duration < 5">
+        5+<input type="radio" name="selectDuration" value="duration >= 5"></td>
   </tr>
   <tr>
     <td><b><ins>Album</ins></b></td>
@@ -646,7 +646,12 @@ table, th, td {
 
                 //TODO: complete options for song handling
                 if (!empty($songTitle) || !empty($songGenre) || isset($songDuration)) {
-
+                    $songAttributes = array();
+                    if (!empty($songTitle)) array_push($songAttributes, "title = '".$songTitle."'");
+                    if (!empty($songGenre)) array_push($songAttributes, "genre = '".$songGenre."'");
+                    if (isset($songDuration)) array_push($songAttributes, $songDuration);
+                    $songAttributes = join(" AND ", $songAttributes);
+                    $result = executePlainSQL("select $attributes from song WHERE $songAttributes");
                 } else {
                     $result = executePlainSQL("select $attributes from song");
                 }
