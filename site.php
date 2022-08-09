@@ -85,14 +85,14 @@ table, th, td {
         <option value="userplaylists">Playlists</option>
         </select>
         <br/>
-        Enter viewing criteria in table below:
+        Select attributes to view and potential search criteria below:
         <br/>
         <table>
   <tr>
     <td><b><ins>Song</ins></b></td>
-    <td><b>Title</b></td>
-    <td><b>Genre</b></td>
-    <td><b>Duration (Minutes)</b></td>
+    <td><b><input type="checkbox" name="formSong[]" value="title"> Title </b></td>
+    <td><b><input type="checkbox" name="formSong[]" value="genre">Genre </b></td>
+    <td><b><input type="checkbox" name="formSong[]" value="duration">Duration (Minutes) </b></td>
   </tr>
   <tr>
     <td></td>
@@ -106,8 +106,8 @@ table, th, td {
   </tr>
   <tr>
     <td><b><ins>Album</ins></b></td>
-    <td><b>Title</b></td>
-    <td><b>Number of Songs</b></td>
+    <td><b><input type="checkbox" name="formAlbum[]" value="title">Title</b></td>
+    <td><b><input type="checkbox" name="formAlbum[]" value="numSongs">Number of Songs</b></td>
     <td></td>
   </tr>
   <tr>
@@ -122,7 +122,7 @@ table, th, td {
 </tr>
 <tr>
     <td><b><ins>Playlist</ins></b></td>
-    <td><b>Playlist Name</b></td>
+    <td><b><input type="checkbox" name="formPlaylist[]" value="name">Playlist Name</b></td>
     <td></td>
     <td></td>
 </tr>
@@ -623,31 +623,41 @@ table, th, td {
             $albumNumSongs = $_POST['selectNumSongs'];
 
             if ($table == "userplaylists") {
+                $attributes = array("playlistid");
+
+                if (IsChecked('formPlaylist', 'name')) array_push($attributes, 'playlistname AS "Playlist Names"');
+
+                $attributes = join(",", $attributes);
                 if (!empty($playlistName)) {
-                    $result = executePlainSQL("select playlistname AS \"Playlist Names\" FROM userplaylists
+                    $result = executePlainSQL("select $attributes FROM userplaylists
                         WHERE playlistname LIKE '%$playlistName%'");
                 } else {
-                    $result = executePlainSQL("select playlistname AS \"Playlist Names\" from userplaylists");
+                    $result = executePlainSQL("select $attributes from userplaylists");
                 }
             } else if ($table == "song") {
-
+                $result = executePlainSQL("select * from song");
+                //TODO: complete options for song handling
             } else if ($table == "album") {
+                $attributes = array("albumid");
+
+                if (IsChecked('formAlbum', 'title')) array_push($attributes, 'title');
+                if (IsChecked('formAlbum', 'numSongs')) array_push($attributes, 'numsongs');
+
+                $attributes = join(",", $attributes);
                 if (!empty($albumName)) {
                     if (isset($albumNumSongs)) {
-                        $result = executePlainSQL("select * from album WHERE numsongs $albumNumSongs AND title LIKE '%$albumName%'");
+                        $result = executePlainSQL("select $attributes from album WHERE numsongs $albumNumSongs AND title LIKE '%$albumName%'");
                     } else {
-                        $result = executePlainSQL("select * from album WHERE title LIKE '%$albumName%'");
+                        $result = executePlainSQL("select $attributes from album WHERE title LIKE '%$albumName%'");
                     }
                 } else {
                     if (isset($albumNumSongs)) {
-                        $result = executePlainSQL("select * from album WHERE numsongs $albumNumSongs");
+                        $result = executePlainSQL("select $attributes from album WHERE numsongs $albumNumSongs");
                     } else {
-                        $result = executePlainSQL("select * from album");
+                        $result = executePlainSQL("select $attributes from album");
                     }
                 }
             }
-            //$result = executePlainSQL("select * from $table");
-            //$result = executeBoundSQL();
             printCustomResult($result);
         }
 
